@@ -12,8 +12,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    // The userService is autowired true the constructor. Spring will use our UserService for
-    // validation of the user during login.
     private final UserDetailsService userService;
 
     public SecurityConfiguration(UserDetailsService userService) {
