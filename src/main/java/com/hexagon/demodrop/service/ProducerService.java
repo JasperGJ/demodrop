@@ -10,6 +10,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,7 +43,7 @@ public class ProducerService {
 
         return true;
     }
-
+    @Transactional
     public boolean checkToken(String secret){
         UUID id = UUID.fromString(secret);
         tokenRepository.findAll();
@@ -57,7 +58,7 @@ public class ProducerService {
             Message message = new Message("Congratulations","You are registered",user);
             messageRepository.save(message);
             userRepository.save(user);
-            deleteToken(id);
+            tokenRepository.deleteById(id);
             return true;
         }
         return false;
