@@ -47,6 +47,9 @@ public class User implements UserDetails {
         return authorities;
     }
 
+    public User() {
+    }
+
     public User(String email, String password, boolean enabled) {
         this.email = email;
         this.password = password;
