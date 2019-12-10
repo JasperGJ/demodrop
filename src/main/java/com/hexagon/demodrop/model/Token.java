@@ -1,5 +1,7 @@
 package com.hexagon.demodrop.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +13,7 @@ public class Token {
 
     @Id
     @GeneratedValue
+    @Type(type="org.hibernate.type.UUIDCharType")
     private UUID id;
     private long user_id;
     private Date date;
