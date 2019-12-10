@@ -1,4 +1,4 @@
-package model;
+package com.hexagon.demodrop.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

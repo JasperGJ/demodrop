@@ -1,6 +1,6 @@
 package com.hexagon.demodrop.repository;
 
-import model.User;
+import com.hexagon.demodrop.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 
