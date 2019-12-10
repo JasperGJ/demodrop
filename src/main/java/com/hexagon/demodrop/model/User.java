@@ -24,6 +24,8 @@ public class User implements UserDetails {
 
     @Lob
     private byte[] photo;
+    @Lob
+    private byte[] thumbnail;
 
     @OneToMany
     private List<Demo> demos = new ArrayList<>();
@@ -140,5 +142,29 @@ public class User implements UserDetails {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public byte[] getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public List<Demo> getDemos() {
+        return demos;
+    }
+
+    public void setDemos(List<Demo> demos) {
+        this.demos = demos;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }
