@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class User implements UserDetails {
@@ -23,6 +24,9 @@ public class User implements UserDetails {
 
     @Lob
     private byte[] photo;
+
+    @OneToMany
+    private List<Demo> demos = new ArrayList<>();
 
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
