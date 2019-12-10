@@ -1,0 +1,14 @@
+a {
+    color: white;
+    font-size: 0.6rem;
+    font-weight: bold;
+    display: block;
+}
+
+.Login-H2 {
+    margin-top: 60px;
+}
+
+.Login-Button {
+    margin-top: 20px;
+}

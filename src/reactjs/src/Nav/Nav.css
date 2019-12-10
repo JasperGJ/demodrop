@@ -1,0 +1,43 @@
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    font-size: 0.7rem;
+
+  }
+  
+  li {
+    display: inline-block;
+    margin: 10px 11px;
+
+  }
+  
+  li > a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+
+  }
+  
+  li > a:hover {
+    color: #b6a0a0;
+  }
+
+  a.active {
+      color: #a39d9d;
+      font-size: 0.75rem;
+      text-decoration: underline;
+  }
+
+  @media screen and (max-width: 465px)  {
+    ul {
+        text-align: center;
+    }
+
+    li > a  {
+      font-size: 0.9rem;
+      padding-block: 5px;
+    }
+}

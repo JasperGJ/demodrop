@@ -1,0 +1,52 @@
+p {
+    font-size: 0.6rem;
+    text-align: left;
+}
+
+/* .Demodrop-Container {
+    text-align: center;
+    width: 30vw;
+    margin: 0 auto;
+} */
+
+.Demodrop-P {
+    margin-top: 30px;
+}
+
+.DemoBelongToHexagon {
+    width: 320px;
+    display: block;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 465px)  {
+    .DemoBelongToHexagon{
+        width:230px;
+        
+    }
+}
+
+/* .Dropdemo-File { */
+    /* background-color: white; */
+    /* border-radius: 3px;
+    color: black;
+    width: 31vw; */
+/* } */
+
+ input[type='file']{
+    cursor: pointer;
+    background-color: #707070;
+    color: black;
+}
+
+/*
+@media screen and (max-width: 800px)  {
+    input {
+        width:200px;
+        border-radius: 3px;
+        border: none;
+        padding: 5px;
+        display: block;
+        margin: 0 auto;
+    }
+} */
