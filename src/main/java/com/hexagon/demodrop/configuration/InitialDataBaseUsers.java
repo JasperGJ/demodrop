@@ -35,13 +35,13 @@ public class InitialDataBaseUsers implements ApplicationListener<ContextRefreshe
 
         List<Role> roles = new ArrayList<>();
 
-        User user = new User();
+        User user = new User(
+                "admin@hexagon.com",
+                passwordEncoder.encode("secret"),
+                true);
         roles.add(roleRepository.findByName("ROLE_USER"));
         roles.add(roleRepository.findByName("ROLE_BACKOFFICE"));
         roles.add(roleRepository.findByName("ROLE_ADMIN"));
-        user.setPassword(passwordEncoder.encode("secret"));
-        user.setEmail("admin@hexagon.com");
-        user.setEnabled(true);
         user.setRoles(roles);
         userRepository.save(user);
 

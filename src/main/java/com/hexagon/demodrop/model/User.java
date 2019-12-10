@@ -28,6 +28,9 @@ public class User implements UserDetails {
     @OneToMany
     private List<Demo> demos = new ArrayList<>();
 
+    @OneToMany
+    private List<Message> messages=new ArrayList<>();
+
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -42,6 +45,12 @@ public class User implements UserDetails {
         Collection<GrantedAuthority>  authorities = new ArrayList<>();
         roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
         return authorities;
+    }
+
+    public User(String email, String password, boolean enabled) {
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
     }
 
     @Override
