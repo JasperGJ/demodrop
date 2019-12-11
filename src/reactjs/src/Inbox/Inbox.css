@@ -1,0 +1,109 @@
+h5 {
+    margin: 5px 0;
+}
+
+/* maakt grid met 3 kolommen*/
+.InboxContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 50px;
+    grid-row-gap: 0;
+    margin: 0 50px;
+}
+
+/*grid1 bestaande uit 1 kolom*/
+.BoxDemos {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+/*grid2  bestaande uit 2 kolommen*/
+.DemoShow {
+    grid-area: 1 / 2 / 2 / 4;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.InboxH2 {
+    margin-bottom: 5px;
+}
+
+.Demo {
+    padding-bottom: 15px;
+    border: 1px solid white;
+    text-align: right;
+}
+
+.Date, .TitleSong{
+    padding: 5px 10px;
+}
+
+.DemoInfo {
+    border: 1px solid white;
+}
+
+audio {
+    margin-bottom: 20px;
+}
+
+select {
+    display: inline;
+}
+
+.DeclineButton, .AcceptButton {
+    border-radius: 10px;
+    width:220px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: white;
+    background-color: #707070;
+    border: 3px solid white;
+    height: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: all 300ms ease-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+.AcceptButton {
+    margin-right: 250px;
+}
+
+.Description {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.TextAreaDescription, .TextAreaAnswer {
+    height: 10px;
+    width: 700px;
+}
+
+.SpanAnswer {
+    text-align: left;
+}
+
+.AnswerContainer, .DescriptionContainer {
+    width: 700px;
+    text-align: left;
+    margin: 5px auto;
+}
+
+.Select {
+    display: inline-block;
+    margin-right:0;
+
+}
+
+#AnswerAndSelectMessageContainer > span {
+    width:80%;
+    display:inline-block;
+    margin-left:-4px;
+    text-align:left;
+}
+
+#SelectMessage {
+    width:20%;
+    margin-bottom: 5px;
+}
+
