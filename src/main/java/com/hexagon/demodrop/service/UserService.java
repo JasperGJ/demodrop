@@ -64,4 +64,14 @@ public class UserService implements UserDetailsService {
         return thumbOutput;
     }
 
+    //TODO  method resetpassword
+    // parameter email
+
+    //TODO method confirmreset
+    // paraneter token
+    // returns redirectstring  https://locolhost:8080/reset?token=1334343-12332-323-32&email=admin@admin.com
+
+    //TODO method changepassword
+    // paramter token, password
+    // return true/false
 }

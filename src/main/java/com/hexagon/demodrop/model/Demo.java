@@ -1,6 +1,7 @@
 package com.hexagon.demodrop.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -14,6 +15,7 @@ public class Demo {
     private String fileName;
     @Lob
     private byte[] audio;
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -61,5 +63,17 @@ public class Demo {
 
     public void setAudio(byte[] audio) {
         this.audio = audio;
+    }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

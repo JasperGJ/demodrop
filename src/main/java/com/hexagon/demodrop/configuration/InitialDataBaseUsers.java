@@ -18,7 +18,6 @@ import java.util.List;
 public class InitialDataBaseUsers implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
 
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -44,8 +43,6 @@ public class InitialDataBaseUsers implements ApplicationListener<ContextRefreshe
         roles.add(roleRepository.findByName("ROLE_ADMIN"));
         user.setRoles(roles);
         userRepository.save(user);
-
-
     }
 
     @Transactional

@@ -39,6 +39,7 @@ public class ProducerService {
         Token token = (new Token(user.getId()));
         tokenRepository.save(token);
 
+        //TODO add token link to text http://localhost:8080/confirm?token=53533-5355=
         emailService.sendMail("Welcome to Hexagon","Welcome!",user.getEmail());
 
         return true;
@@ -64,6 +65,11 @@ public class ProducerService {
         return false;
     }
 
-    private void deleteToken(UUID id) {
-    }
+    //TODO create method getProfileData
+    // Parameter email of user
+    // returns ProfileData
+
+    //TODO create method saveDemo
+    // Parameters email,title,description,Audiofile
+    // returns false/true
 }
