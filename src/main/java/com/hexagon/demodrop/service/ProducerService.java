@@ -1,10 +1,8 @@
 package com.hexagon.demodrop.service;
 
-import com.hexagon.demodrop.model.Demo;
 import com.hexagon.demodrop.model.Message;
 import com.hexagon.demodrop.model.Token;
 import com.hexagon.demodrop.model.User;
-import com.hexagon.demodrop.object.LoginData;
 import com.hexagon.demodrop.object.ProfileData;
 import com.hexagon.demodrop.repository.MessageRepository;
 import com.hexagon.demodrop.repository.TokenRepository;
@@ -73,12 +71,14 @@ public class ProducerService {
 
     }
 
+    public ProfileData getProfileData(String email) {
+
+        User user = userRepository.findByEmail(email);
+        if (user == null) throw new UsernameNotFoundException(String.format("Username[%s] not found", email));
+        return new ProfileData(user);
+    }
+
 }
-
-
-    //TODO create method getProfileData zie logindata
-    // Parameter email of user
-    // returns ProfileData
 
     //TODO create method saveDemo
     // Parameters email,title,description,Audiofile

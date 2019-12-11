@@ -1,6 +1,7 @@
 package com.hexagon.demodrop.controler;
 
 
+import com.hexagon.demodrop.object.ProfileData;
 import com.hexagon.demodrop.service.ProducerService;
 import com.hexagon.demodrop.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,16 @@ public class TestControler {
         if (result)
             return ResponseEntity.status(HttpStatus.OK).body("Het is gelukt");
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Het is niet gelukt");
+    }
+
+    @GetMapping("/test1")
+    public ResponseEntity<ProfileData> testProfileData(){
+
+        ProfileData profileData = producerService.getProfileData("admin@hexagon.com");
+        if (profileData != null){
+            return ResponseEntity.status(HttpStatus.OK).body(profileData);
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
 }
