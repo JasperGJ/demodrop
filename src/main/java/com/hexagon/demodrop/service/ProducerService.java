@@ -1,11 +1,15 @@
 package com.hexagon.demodrop.service;
 
+import com.hexagon.demodrop.model.Demo;
 import com.hexagon.demodrop.model.Message;
 import com.hexagon.demodrop.model.Token;
 import com.hexagon.demodrop.model.User;
+import com.hexagon.demodrop.object.LoginData;
+import com.hexagon.demodrop.object.ProfileData;
 import com.hexagon.demodrop.repository.MessageRepository;
 import com.hexagon.demodrop.repository.TokenRepository;
 import com.hexagon.demodrop.repository.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,46 +34,53 @@ public class ProducerService {
         this.messageRepository = messageRepository;
     }
 
-    public boolean createUser(String email, String password){
+    public boolean createUser(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null) return false;
-        user = new User(email,passwordEncoder.encode(password),false);
+        user = new User(email, passwordEncoder.encode(password), false);
         userRepository.save(user);
 
         Token token = (new Token(user.getId()));
         tokenRepository.save(token);
 
-        //TODO add token link to text http://localhost:8080/confirm?token=53533-5355=
-        emailService.sendMail("Welcome to Hexagon","Welcome!",user.getEmail());
+        emailService.sendMail(
+                "Welcome to Hexagon",
+                "Click on the link to confirm you registration: http://localhost:8080/confirm?token=" + token.getId(),
+                user.getEmail());
 
         return true;
     }
+
     @Transactional
-    public boolean checkToken(String secret){
+    public boolean checkToken(String secret) {
         UUID id = UUID.fromString(secret);
         tokenRepository.findAll();
         Optional<Token> optionalToken = tokenRepository.findById(id);
-        if (optionalToken.isPresent()){
+        if (optionalToken.isPresent()) {
             Token token = optionalToken.get();
-            if (token.getDate().after(new Date(new Date().getTime() + 24*60*60*1000))) return false;
+            if (token.getDate().after(new Date(new Date().getTime() + 24 * 60 * 60 * 1000))) return false;
             User user = userRepository.findById(token.getUser_id()).orElse(null);
             if (user == null)
                 return false;
             user.setEnabled(true);
-            Message message = new Message("Congratulations","You are registered",user);
+            Message message = new Message("Congratulations", "You are registered", user);
             messageRepository.save(message);
             userRepository.save(user);
             tokenRepository.deleteById(id);
             return true;
         }
         return false;
+
     }
 
-    //TODO create method getProfileData
+}
+
+
+    //TODO create method getProfileData zie logindata
     // Parameter email of user
     // returns ProfileData
 
     //TODO create method saveDemo
     // Parameters email,title,description,Audiofile
     // returns false/true
-}
+
