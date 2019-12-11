@@ -1,5 +1,6 @@
 package com.hexagon.demodrop.service;
 
+import com.hexagon.demodrop.model.Message;
 import com.hexagon.demodrop.model.User;
 import com.hexagon.demodrop.model.Token;
 import com.hexagon.demodrop.object.LoginData;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +20,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -24,23 +30,27 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     private TokenRepository tokenRepository;
     private EmailService emailService;
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
+    //@Autowired
+    public UserService(UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService) {
         this.userRepository = userRepository;
+        this.tokenRepository = tokenRepository;
+        this.emailService = emailService;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails user = userRepository.findByEmail(username);
-        if (user == null) throw new UsernameNotFoundException(String.format("User %s not found",username));
+        if (user == null) throw new UsernameNotFoundException(String.format("User %s not found", username));
         return user;
     }
 
-    public LoginData getLoginData(String email){
+    public LoginData getLoginData(String email) {
 
         User user = userRepository.findByEmail(email);
-        if (user == null ) throw new UsernameNotFoundException(String.format("Username[%s] not found",email));
+        if (user == null) throw new UsernameNotFoundException(String.format("Username[%s] not found", email));
         return new LoginData(user);
     }
 
@@ -50,11 +60,11 @@ public class UserService implements UserDetailsService {
                                MultipartFile file) throws IOException, UsernameNotFoundException {
 
         User user = userRepository.findByEmail(email);
-        if (user == null ) throw new UsernameNotFoundException(String.format("Username[%s] not found",email));
+        if (user == null) throw new UsernameNotFoundException(String.format("Username[%s] not found", email));
         user.setName(name);
         user.setDescription(description);
         user.setPhoto(file.getBytes());
-        user.setThumbnail(createThumbnail(file,100).toByteArray());
+        user.setThumbnail(createThumbnail(file, 100).toByteArray());
         userRepository.save(user);
         return true;
     }
@@ -64,7 +74,7 @@ public class UserService implements UserDetailsService {
         BufferedImage thumbImg = null;
         BufferedImage img = ImageIO.read(originalFile.getInputStream());
         thumbImg = Scalr.resize(img, Scalr.Method.AUTOMATIC, Scalr.Mode.AUTOMATIC, width, Scalr.OP_ANTIALIAS);
-        ImageIO.write(thumbImg, originalFile.getContentType().split("/")[1] , thumbOutput);
+        ImageIO.write(thumbImg, originalFile.getContentType().split("/")[1], thumbOutput);
         return thumbOutput;
     }
 
@@ -82,26 +92,50 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
+    public String ConfirmResetPassword(String secret) {
+        UUID id = UUID.fromString(secret);
+        tokenRepository.findAll();
+        Optional<Token> optionalToken = tokenRepository.findById(id);
+        if (optionalToken.isPresent()) {
+            Token token = optionalToken.get();
+            if (token.getDate().after(new Date(new Date().getTime() + 24 * 60 * 60 * 1000)))
+                throw new UsernameNotFoundException("Token has expired"); // TODO: change throw
+            User user = userRepository.findById(token.getUser_id()).orElse(null);
+            if (user == null)
+                throw new UsernameNotFoundException("User not found"); //TODO: change throw
+            user.setEnabled(false);
+            userRepository.save(user);
+            tokenRepository.deleteById(id);
 
+            Token newToken = new Token(user.getId());
+            return String.format("/change?token=%s&email=%s", token.getId().toString(), user.getEmail());
+        }
+        return "";
 
+    }
 
+    public boolean ChangePassword(String secret, String password) {
+        UUID id = UUID.fromString(secret);
+        tokenRepository.findAll();
+        Optional<Token> optionalToken = tokenRepository.findById(id);
+        if (optionalToken.isPresent()) {
+            Token token = optionalToken.get();
+            if (token.getDate().after(new Date(new Date().getTime() + 24 * 60 * 60 * 1000)))
+                throw new UsernameNotFoundException("Token has expired"); // TODO: change throw
+            User user = userRepository.findById(token.getUser_id()).orElse(null);
+            if (user == null)
+                throw new UsernameNotFoundException("User not found"); //TODO: change throw
+            user.setEnabled(true);
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+            emailService.sendMail(
+                    "Your password has been reset",
+                    "Hexagonian,\n Your password has been reset",
+                    user.getEmail());
+            return false;
+        }
 
+        return false;
+    }
 
-
-
-
-
-
-
-
-
-
-
-    //TODO method confirmreset
-    // paraneter token
-    // returns redirectstring  https://locolhost:8080/reset?token=1334343-12332-323-32&email=admin@admin.com
-
-    //TODO method changepassword
-    // paramter token, password
-    // return true/false
 }
