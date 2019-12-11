@@ -6,28 +6,40 @@ h1 {
     font-style: normal;
     line-height: 1.34;
     margin-top: 10px;
-    margin-bottom: 3px;
-    /* font-size: 2.1rem; */
+    margin-bottom: 0;
+}
+
+.LogLinks {
+    display: inline-block;
+    text-align: right;
+    background-position: 100%;
+    margin: 0;
+    padding-right: 20px;
+    padding-bottom: 3px;
+}
+
+.LogLinks li {
+    margin: 0;
+    padding-bottom: 5px;
 }
 
 img {
     display: inline-block;
     height:41px;
-    width:37px;  
-    margin-top: 3px;  
+    width:37px;
+    margin-top: 10px;
 }
 
-.container {
-    border-bottom: 0.02px solid white;
+.ContainerHeader {
+    border-bottom: 1px solid white;
     padding-top:5px;
-    /* font-size: 1.5r em; */
 }
 
-.headerLeft {
+.HeaderLeft {
     margin-right: 50px;
 }
 
-.headerRight {
+.HeaderRight {
     margin-left: 50px;
 }
 
@@ -41,7 +53,7 @@ img {
         display: block;
     }
 
-    .headerLeft, .headerRight {
+    .HeaderLeft, .HeaderRight {
         margin: 0;
     }
 } 

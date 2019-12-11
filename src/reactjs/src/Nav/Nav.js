@@ -14,15 +14,11 @@ import { withRouter } from 'react-router-dom';
 
     return (
         <nav>
-            <div>
+            <div className="Nav">
                 <ul>
-                    {isUserLoggedIn && <li> <Link to="/profile">Profile</Link></li>}
-                    {isUserLoggedIn && <li> <Link to="/editprofile">Edit Profile</Link></li>}
+                    {isUserLoggedIn && <li> <Link to="/profile" >Profile</Link></li>}
+                    {isUserLoggedIn && <li> <Link to="/editprofile" >Edit Profile</Link></li>}
                     {isUserLoggedIn && <li> <Link to="/demodrop">Demo Drop</Link></li>}
-                </ul>
-                <ul className="navbar-nav navbar-collapse justify-content-end">
-                    {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
-                    {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout} >Logout</Link></li>}
                 </ul>
             </div>
         </nav>

@@ -8,7 +8,7 @@ import {Link } from 'react-router-dom';
 const signUp = () => {
     return (
         <div>
-            <h2 className="Signup-H2">SIGN UP</h2>
+            <h2 className="SignupH2">SIGN UP</h2>
             <InputText className="Input-Signup" placeholder="USERNAME" />
             <br />
             <InputText className="Input-Signup" placeholder= "EMAIL"/>

@@ -2,17 +2,18 @@ import React from 'react';
 import foto from '../dondiablo-portret.jpg';
 import './EditProfile.css';
 import InputText from '../Components/InputText/InputText';
+import Button from "../Components/Button/Button";
 
 const editProfile = () => {
-    return (
+        return (
         <div>
             <h2>EDIT PROFILE</h2>
-            <img className="Edit-Profile-Photo" src={foto} alt="foto" />
-            <InputText className="Input-Login" placeholder="ARTIST NAME"/>
+            <img className="EditProfilePhoto" src={foto} alt="foto" />
+            <InputText  placeholder="ARTIST NAME"/>
             <br/>
             <textarea placeholder="Type your BIO"/>
             <br/>
-            <button type="submit">SAVE</button>
+            <Button type="submit">SAVE</Button>
         </div>
     )
 };

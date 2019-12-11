@@ -1,6 +1,6 @@
 .Error {
     color: red;
-    /* border: 1px solid red; */
+    background-color: lightpink;
     width: 320px;
     margin: 5px auto;
     padding: 5px;

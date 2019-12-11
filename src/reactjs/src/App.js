@@ -11,6 +11,7 @@ import Profile from './Profile/Profile';
 import EditProfile from './EditProfile/EditProfile';
 import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute'
 import Error from './Error/Error.js';
+import Inbox from './Inbox/Inbox';
 
 function App() {
 
@@ -30,13 +31,14 @@ function App() {
             <AuthenticatedRoute path="/profile" component={Profile} />
             <AuthenticatedRoute path="/editprofile" component={EditProfile} />
             <AuthenticatedRoute path="/demodrop" component={DemoDrop} />
+            {/*//todo voor onderstaande pagina moet Nav(profile etc.) van producer niet verschijnen*/}
+            <AuthenticatedRoute path="/inbox" component={Inbox} />
             <Route component>
               <Error>an error occurred</Error>
             </Route>
           </Switch >
         </Router>
       </div>
-
   );
 }
 

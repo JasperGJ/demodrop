@@ -1,4 +1,4 @@
-.Edit-Profile-Photo {
+.EditProfilePhoto {
         border-radius: 50%;
         width: 70px;
         height: 70px;
@@ -9,7 +9,7 @@
         display: block;
 }
 
-.Edit-Profile-Photo:hover {
+.EditProfilePhoto:hover {
     opacity: 0.8;
 }
 

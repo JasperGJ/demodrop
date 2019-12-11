@@ -113,6 +113,7 @@ function DemoDrop() {
             <form method="post" action="/demodrop" onSubmit={doDropDemo} ref={demoForm}>
                 {/* <h3>{props.profile.name}</h3> */}
                 <InputText className="Input-Demodrop" name="name" placeholder=" SONG NAME" />
+                {/*//todo moet voor Error componenten nog zorgen dat alleen getoond wordt bij een ongeldige invoer*/}
                 <Error>{formValidation.nameError && formValidation.name}</Error>
                 <br />
                 <textArea className="Input-Demodrop" name="description" placeholder=" DESCRIPTION" />

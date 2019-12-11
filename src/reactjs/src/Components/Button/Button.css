@@ -1,4 +1,4 @@
-button {
+.SubmitButton {
     width:320px;
     color: white;
     background-color: #707070;
@@ -13,7 +13,7 @@ button {
     text-decoration: none;
   }
   
-  button:hover {
+  .SubmitButton:hover {
     color: white;
     background-color: #222;
     border: 3px solid white;
