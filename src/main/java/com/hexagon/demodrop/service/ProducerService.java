@@ -1,9 +1,11 @@
 package com.hexagon.demodrop.service;
 
+import com.hexagon.demodrop.model.Demo;
 import com.hexagon.demodrop.model.Message;
 import com.hexagon.demodrop.model.Token;
 import com.hexagon.demodrop.model.User;
 import com.hexagon.demodrop.object.ProfileData;
+import com.hexagon.demodrop.repository.DemoRepository;
 import com.hexagon.demodrop.repository.MessageRepository;
 import com.hexagon.demodrop.repository.TokenRepository;
 import com.hexagon.demodrop.repository.UserRepository;
@@ -11,8 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,12 +28,14 @@ public class ProducerService {
     private TokenRepository tokenRepository;
     private EmailService emailService;
     private MessageRepository messageRepository;
+    private DemoRepository demoRepository;
 
-    public ProducerService(UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository) {
+    public ProducerService(UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository, DemoRepository demoRepository) {
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
         this.messageRepository = messageRepository;
+        this.demoRepository = demoRepository;
     }
 
     public boolean createUser(String email, String password) {
@@ -78,9 +84,21 @@ public class ProducerService {
         return new ProfileData(user);
     }
 
+    public boolean SaveDemo(String email,
+                            String title,
+                            String description,
+                            MultipartFile file) throws IOException, UsernameNotFoundException {
+
+        User user = userRepository.findByEmail(email);
+        if (user == null) throw new UsernameNotFoundException(String.format("Username[%s] not found", email));
+        Demo demo = new Demo();
+        demo.setUser(user);
+        demo.setTitle(title);
+        demo.setDescription(description);
+        demo.setAudio(file.getBytes());
+        demoRepository.save(demo);
+        user.getDemos().add(demo);
+        userRepository.save(user);
+        return true;
+    }
 }
-
-    //TODO create method saveDemo
-    // Parameters email,title,description,Audiofile
-    // returns false/true
-
