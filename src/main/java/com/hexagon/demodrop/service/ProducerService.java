@@ -97,8 +97,13 @@ public class ProducerService {
         demo.setTitle(title);
         demo.setDescription(description);
         demo.setAudio(file.getBytes());
+        demo.setUploaded(new Date());
+        demo.setStatus("new");
         demoRepository.save(demo);
         user.getDemos().add(demo);
+        Message message = new Message("Congratulations", "You uploaded a demo", user);
+        messageRepository.save(message);
+        user.getMessages().add(message);
         userRepository.save(user);
         return true;
     }
