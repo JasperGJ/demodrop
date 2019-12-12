@@ -63,6 +63,7 @@ public class ProducerService {
             user.setEnabled(true);
             Message message = new Message("Congratulations", "You are registered", user);
             messageRepository.save(message);
+            user.getMessages().add(message);
             userRepository.save(user);
             tokenRepository.deleteById(id);
             return true;
