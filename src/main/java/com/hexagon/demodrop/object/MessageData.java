@@ -16,7 +16,7 @@ public class MessageData {
         this.id = message.getId();
         this.title = message.getTitle();
         this.text = message.getText();
-        this.from = message.getUser().getPhoto();
+        this.from = message.getUser().getThumbnail();
         this.date = message.getDate();
         this.seen = message.isSeen();
     }
