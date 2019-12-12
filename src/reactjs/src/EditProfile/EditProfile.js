@@ -107,7 +107,9 @@ function EditProfile() {
 
                     if (response.status === 200) {
 // als status 200, dan is goed gegaan en gaan we naar profile pagina
-                        this.window.location.push("/profile");
+                        alert("Gegevens zijn goed verwerkt.")
+                        // TODO: redirect naar homepage
+                        window.location.href ="/profile";
 
 // als niet goed, komt er alert message
                         alert("er is iets mis gegaan")
