@@ -12,10 +12,10 @@ public class LoginData {
         this.name = user.getName();
         this.thumbnail = user.getThumbnail();
         role = user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))
-                ?  "/admin?login=admin"
+                ?  "/admin"
                 : user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_BACKOFFICE"))
-                ? "/backoffice?login=backoffice"
-                : "/profile?login=user";
+                ? "/backoffice"
+                : "/profile";
     }
 
 }
