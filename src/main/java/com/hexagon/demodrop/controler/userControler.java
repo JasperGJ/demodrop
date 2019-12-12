@@ -66,7 +66,7 @@ public class userControler {
             @RequestParam("photo") MultipartFile file,
             @AuthenticationPrincipal UserDetails user) throws IOException {
 
-        System.out.println(String.format("Updated profile for %s, with %s, %s",name,description));
+        System.out.println(String.format("Updated profile for %s, with %s, %s",user.getUsername(), name,description));
         boolean result = userService.SaveProfile(
                 user.getUsername(),
                 name,
