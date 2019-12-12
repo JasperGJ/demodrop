@@ -30,8 +30,8 @@ public class InitialDataBaseUsers implements ApplicationListener<ContextRefreshe
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
+        if (userRepository.count() > 0) return;
         createRoles();
-
         List<Role> roles = new ArrayList<>();
 
         User user = new User(
