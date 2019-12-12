@@ -19,10 +19,14 @@ grid-row-gap: 0;
 margin: 0 10vw;
 }
 
-.Profile 
-{ grid-area: 1 / 1 / 1 / 2;
-text-align: left;
+.Profile {
+    grid-area: 1 / 1 / 1 / 2;
 }
+
+.Profile > p {
+    text-align: left;
+}
+
 .Notifications 
 {
     grid-area: 1 / 2 / 2 / 5;
