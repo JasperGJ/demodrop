@@ -16,7 +16,7 @@ const header = (props) => {
             <h1 className="HeaderRight">Demo Drop</h1>
             {/*{props.loggedIn? <Link to = {props.setLoggedIn}>log out</Link>: ''}*/}
             <ul className="LogLinks">
-                {!isUserLoggedIn && <li><Link to="/login">Login</Link></li>}
+                {!isUserLoggedIn && <li><Link to="/loginform">Login</Link></li>}
                 {isUserLoggedIn && <li><Link to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
             </ul>
         </div>

@@ -1,19 +1,54 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import './Inbox.css';
-import Button from "../Components/Button/Button";
 
 
 const Inbox = () => {
+
+    const [inbox,setInbox] = useState({
+        loaded : false,
+        data : {}
+    });
+
+    useEffect(
+        () => {
+            getInbox();
+        },
+        [],
+    );
+
+    const getInbox = () => {
+
+        fetch("/inbox")
+
+
+
+            .then(responce => {
+                console.log("responce",responce);
+                if (responce.status === 200)return responce.json();
+            })
+            .then(json => setInbox({loaded : true, data : json}))
+            .catch(e => console.warn(e));
+    }
+
+    console.log("inbox",inbox)
     return (
         <div>
             <div className="InboxContainer">
                 <div className="BoxDemos">
                     <h2 className="InboxH2">INBOX DEMOS</h2>
-                    <div className="Demo">
-                        <div className="Date">28-9-2019</div>
-                        {/*//todo de radio button moet nog gemaakt worden. probleem is dat als ik hem aanmaak, hij telkens centreert*/}
-                        <div className="TitleSong">Title of the Song</div>
-                    </div>
+                    {inbox.loaded
+                    ?
+                        inbox.data.items.map((item,index)  =>
+                            <div key={index} className="Demo">
+                                <div className="Date">28-9-2019</div>
+                                {/*//todo de radio button moet nog gemaakt worden. probleem is dat als ik hem aanmaak, hij telkens centreert*/}
+                                <div className="TitleSong">{item.title}</div>
+                            </div>
+                        )
+                    :
+                        <div>ophalen</div>
+                    }
+
                 </div>
 
                 <div className="DemoShow">
@@ -39,7 +74,7 @@ const Inbox = () => {
 
                             <textarea className="TextAreaAnswer"/>
                         </div>
-                        <Button>SEND</Button>
+                        <button>SEND</button>
                     </div>
                 </div>
 
