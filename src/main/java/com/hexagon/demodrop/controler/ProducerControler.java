@@ -24,7 +24,8 @@ public class ProducerControler {
 
     @GetMapping("/confirm")
     RedirectView confirmReset(String token){
-        producerService.checkToken(token);
+        boolean result = producerService.checkToken(token);
+
         return new RedirectView("/loginform");
     }
 
@@ -42,14 +43,14 @@ public class ProducerControler {
         return ResponseEntity.ok(data);
     }
 
-    @PostMapping("/demo")
+    @PostMapping("/demodrop")
     ResponseEntity<String>  saveProfile(
             @RequestParam("name") String title,
             @RequestParam("description") String description,
-            @RequestParam("photo") MultipartFile file,
+            @RequestParam("audio") MultipartFile file,
             @AuthenticationPrincipal UserDetails user) throws IOException {
 
-        System.out.println(String.format("Dropped demo for %s, with %s, %s", title, description));
+        System.out.println(String.format("Dropped demo for %s, with %s, %s",user.getUsername(), title, description));
         boolean result = producerService.SaveDemo(
                 user.getUsername(),
                 title,
