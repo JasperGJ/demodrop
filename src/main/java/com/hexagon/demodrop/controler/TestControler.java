@@ -4,10 +4,16 @@ package com.hexagon.demodrop.controler;
 import com.hexagon.demodrop.object.ProfileData;
 import com.hexagon.demodrop.service.ProducerService;
 import com.hexagon.demodrop.service.UserService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RestController
 public class TestControler {
@@ -33,6 +39,7 @@ public class TestControler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Het is niet gelukt");
     }
 
+
     @GetMapping("/test1")
     public ResponseEntity<ProfileData> testProfileData(){
 
@@ -41,6 +48,13 @@ public class TestControler {
             return ResponseEntity.status(HttpStatus.OK).body(profileData);
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+    }
+
+    @GetMapping("/test2")
+    RedirectView testRedirect() throws URISyntaxException {
+        HttpHeaders headers = new HttpHeaders();
+        String uri = "http://localhost:8080/confirm?token=12345-1235-1234&email=test@test.com";
+        return new RedirectView(null);
     }
 
 }

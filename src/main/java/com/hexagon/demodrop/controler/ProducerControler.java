@@ -8,7 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping
@@ -38,5 +41,23 @@ public class ProducerControler {
         ProfileData data = producerService.getProfileData(user.getUsername());
         return ResponseEntity.ok(data);
     }
+
+    @PostMapping("/demo")
+    ResponseEntity<String>  saveProfile(
+            @RequestParam("name") String title,
+            @RequestParam("description") String description,
+            @RequestParam("photo") MultipartFile file,
+            @AuthenticationPrincipal UserDetails user) throws IOException {
+
+        System.out.println(String.format("Dropped demo for %s, with %s, %s", title, description));
+        boolean result = producerService.SaveDemo(
+                user.getUsername(),
+                title,
+                description,
+                file);
+
+        return ResponseEntity.ok("Ok");
+    }
+
 
 }

@@ -1,11 +1,19 @@
 package com.hexagon.demodrop.controler;
 
 import com.hexagon.demodrop.object.LoginData;
+import com.hexagon.demodrop.object.ProfileData;
 import com.hexagon.demodrop.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping
@@ -50,4 +58,22 @@ public class userControler {
         userService.ChangePassword(token,password);
         return ResponseEntity.status(HttpStatus.OK).body("Mail hes been sent");
     }
+
+    @PostMapping("/profile")
+    ResponseEntity<String>  saveProfile(
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("photo") MultipartFile file,
+            @AuthenticationPrincipal UserDetails user) throws IOException {
+
+        System.out.println(String.format("Updated profile for %s, with %s, %s",name,description));
+        boolean result = userService.SaveProfile(
+                user.getUsername(),
+                name,
+                description,
+                file);
+
+        return ResponseEntity.ok("Ok");
+    }
+
 }
