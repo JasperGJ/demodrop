@@ -1,51 +1,83 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './Profile.css';
-import foto from '../dondiablo-portret.jpg';
 
-const profile = () => {
+
+
+const Profile = () => {
+
+    const [profile, setProfile] = useState({
+        loaded: false,
+        isLoading: false,
+        data: {}
+    });
+
+    useEffect(
+        () => {
+            getProfile();
+        },
+        [],
+    );
+
+    const getProfile = () => {
+        setProfile(
+            {
+                loaded: false,
+                isLoading: true,
+                data: {}
+            });
+        fetch("/profile")
+            .then(response => {
+                console.log("JSON =", response);
+                if (response.status === 200)
+                    return response.json();
+                else return alert("er is iets misgegaan");
+            })
+            .then(json => {
+                console.log("Json =", json);
+                setProfile({loaded: true, isLoading: false, data: json});
+            });
+    };
+    console.log("profile", profile);
+
     return (
-        <div className="Container">
-            <div className="Profile">
-                <img className="Profile-Photo" src={foto} alt="foto" />
+
+        <div>
+
+            {profile.loaded ?
+                <div className="Container">
+                    <div>
+                        <img className="Profile-Photo" src={`data:image/png;base64,${profile.data.photo}`}
+                             alt="profile photo"/>
+                        <div className="Profile">
+                            <h2>About</h2>
+                            <p>
+                                {profile.data.description}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="Notifications">
+                        <h1>
+                            {profile.data.name}
+                        </h1>
+                        {profile.data.messages.map((message, index) =>
+                            <div key={index} className="Notification-Content">
+                                <div className="div1">thumbnail</div>
+                                <div className="Demo-Date">{message.date}</div>
+                                <div className="div3">{message.text}</div>
+                                <div className="div4"> delete demo</div>
+                            </div>
+                        )}
+
+                    </div>
+                </div>
+                :
                 <div>
-                    <h2>About</h2>
-                    <p>Why a re-introduction? Because JavaScript
-                    is notorious for being the world's most
-                    misunderstood programming language. It is
-                    often derided as being a toy, but beneath
-                    its layer of deceptive simplicity, powerful
-                    language features await. JavaScript is now
-                    used by an incredible number of high-profil
-                    applications, showing that deeper knowledge
-                    of this technology is an important skill
-                    for any web or mobile developer.
-                    </p>
+                    loading
                 </div>
-            </div>
-            <div className="Notifications">
-                <h1>DJ Jake Peralta</h1>
-                <div className="Notification-Content">
-                    <div className="div1">one </div>
-                    <div className="Demo-Date">20-12-2019 </div>
-                    <div className="div3">three iiiiiiiiiiiiiiiiiiiiiiiiiiiiii</div>
-                    <div className="div4"> delete demo </div>
-                </div>
-                <div className="Notification-Content">
-                    <div className="div1">one </div>
-                    <div className="Demo-Date">20-12-2019 </div>
-                    <div className="div3">three iiiiiiiiiiiiiiiiiiiiiiiiiiiiii</div>
-                    <div className="div4"> delete demo </div>
-                </div>
-                <div className="Notification-Content">
-                    <div className="div1">one </div>
-                    <div className="Demo-Date">20-12-2019 </div>
-                    <div className="div3">three iiiiiiiiiiiiiiiiiiiiiiiiiiiiii</div>
-                    <div className="div4"> delete demo </div>
-                </div>
-            </div>
-        </div>   
-     )
+            }
+        </div>
+    )
 };
 
-export default profile;
 
+export default Profile;
