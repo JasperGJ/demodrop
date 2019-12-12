@@ -10,6 +10,14 @@ public class EmailService {
 
     @Autowired
     public JavaMailSender emailSender;
+/*  application  propperties
+    spring.mail.host=mail.robbiekeeris.nl
+    spring.mail.port=587
+    spring.mail.username=<hexagon@robbiekeeris.nl>
+    spring.mail.password=<hexagon>
+    spring.mail.properties.mail.smtp.auth=false
+    spring.mail.properties.mail.smtp.starttls.enable=true
+*/
 
     public void sendSimpleMessage(
             String to, String subject, String text) {
