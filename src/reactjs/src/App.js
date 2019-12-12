@@ -12,6 +12,7 @@ import EditProfile from './EditProfile/EditProfile';
 import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute'
 import Error from './Error/Error.js';
 import Inbox from './Inbox/Inbox';
+import Admin from "./Admin/Admin";
 
 function App() {
 
@@ -19,12 +20,13 @@ function App() {
 
       <div className="App">
         <Router>
-          <Header />
+          <Header  />
           <Nav />
 
           <Switch>
             <Route path="/" exact component={LogInRegister} />
-            <Route path="/login" component={LogIn} />
+            <Route path="/index.html" exact component={LogInRegister} />
+            <Route path="/loginform" component={LogIn} />
             <Route path="/signup">
               <SignUp />
             </Route>
@@ -32,7 +34,8 @@ function App() {
             <AuthenticatedRoute path="/editprofile" component={EditProfile} />
             <AuthenticatedRoute path="/demodrop" component={DemoDrop} />
             {/*//todo voor onderstaande pagina moet Nav(profile etc.) van producer niet verschijnen*/}
-            <AuthenticatedRoute path="/inbox" component={Inbox} />
+            <AuthenticatedRoute path="/backoffice" component={Inbox} />
+            <AuthenticatedRoute path="/admin" component={Admin} />
             <Route component>
               <Error>an error occurred</Error>
             </Route>
