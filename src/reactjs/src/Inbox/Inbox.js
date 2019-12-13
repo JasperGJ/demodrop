@@ -4,11 +4,15 @@ import './Inbox.css';
 
 const Inbox = () => {
 
+    const [hightlightedItem,setHightlight] = useState(-1);
     const [inbox,setInbox] = useState({
         loaded : false,
         data : {}
     });
-
+    const [demo,setDemo] = useState({
+        loaded : false,
+        demo : {}
+    });
     useEffect(
         () => {
             getInbox();
@@ -17,11 +21,7 @@ const Inbox = () => {
     );
 
     const getInbox = () => {
-
         fetch("/inbox")
-
-
-
             .then(responce => {
                 console.log("responce",responce);
                 if (responce.status === 200)return responce.json();
@@ -30,7 +30,30 @@ const Inbox = () => {
             .catch(e => console.warn(e));
     }
 
-    console.log("inbox",inbox)
+    const getDemo = (id) => {
+        fetch("/demo/"+id)
+            .then(responce => {
+                console.log("responce",responce);
+                if (responce.status === 200)return responce.json();
+            })
+            .then(json => {
+                var blob = new Blob([json.audio], {type: 'audio/mp3'});
+                console.log("audioblob",blob);
+                setDemo({loaded : true, demo : json, audio : blob})
+            })
+            .catch(e => console.warn(e));
+    }
+
+    const highlightItem = (index) => {
+        setHightlight(index);
+    }
+
+    const itemClicked = (index) => {
+        getDemo(index);
+    }
+
+    console.log("demo",demo);
+
     return (
         <div>
             <div className="InboxContainer">
@@ -39,7 +62,7 @@ const Inbox = () => {
                     {inbox.loaded
                     ?
                         inbox.data.items.map((item,index)  =>
-                            <div key={index} className="Demo">
+                            <div key={index} onMouseLeave={() => highlightItem(-1)} onMouseOver={() => highlightItem(index)} onClick={() => itemClicked(index)} className={`Demo ${hightlightedItem === index ? "Highlight" : ""}`}>
                                 <div className="Date">28-9-2019</div>
                                 {/*//todo de radio button moet nog gemaakt worden. probleem is dat als ik hem aanmaak, hij telkens centreert*/}
                                 <div className="TitleSong">{item.title}</div>
@@ -54,14 +77,16 @@ const Inbox = () => {
                 <div className="DemoShow">
                     <h2 className="InboxH2">DEMO</h2>
                     <div className="DemoInfo">
-                        <h5>DJ Jake Peralta - New Song</h5>
-                        <audio controls/>
+                        <h5>{demo.loaded ? demo.demo.artist+" - "+demo.demo.title: "niks"}</h5>
+                        <audio src={demo.loaded ? `data:audio/mp3;base64,${demo.demo.audio}` : ""} type="audio/mp3" controls/>
                         <br/>
                         <button className="AcceptButton">Accept</button>
                         <button className="DeclineButton">Decline</button>
                         <div className="DescriptionContainer">
                             <span className="Description">Description</span>
-                            <textarea className="TextAreaDescription"/>
+                            <div  className="TextAreaDescription">
+                                {demo.loaded ? demo.demo.description : "niks"}
+                            </div>
                         </div>
                         <div className="AnswerContainer">
                             <div id="AnswerAndSelectMessageContainer">

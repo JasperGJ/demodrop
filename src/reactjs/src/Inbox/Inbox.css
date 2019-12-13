@@ -11,7 +11,9 @@ h5 {
     grid-row-gap: 0;
     margin: 0 50px;
 }
-
+.Highlight {
+    background-color: rgb(188, 185, 236);
+}
 /*grid1 bestaande uit 1 kolom*/
 .BoxDemos {
     grid-area: 1 / 1 / 2 / 2;
