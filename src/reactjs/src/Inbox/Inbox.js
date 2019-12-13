@@ -5,6 +5,7 @@ import './Inbox.css';
 const Inbox = () => {
 
     const [hightlightedItem,setHightlight] = useState(-1);
+    const [templates,setTemplates] = useState([]);
     const [inbox,setInbox] = useState({
         loaded : false,
         data : {}
@@ -27,6 +28,16 @@ const Inbox = () => {
                 if (responce.status === 200)return responce.json();
             })
             .then(json => setInbox({loaded : true, data : json}))
+            .catch(e => console.warn(e));
+    }
+
+    const gettemplates = () => {
+        fetch("/templates")
+            .then(responce => {
+                console.log("responce",responce);
+                if (responce.status === 200)return responce.json();
+            })
+            .then(json => setTemplates( json))
             .catch(e => console.warn(e));
     }
 
@@ -62,7 +73,7 @@ const Inbox = () => {
                     {inbox.loaded
                     ?
                         inbox.data.items.map((item,index)  =>
-                            <div key={index} onMouseLeave={() => highlightItem(-1)} onMouseOver={() => highlightItem(index)} onClick={() => itemClicked(index)} className={`Demo ${hightlightedItem === index ? "Highlight" : ""}`}>
+                            <div key={item.id} onMouseLeave={() => highlightItem(-1)} onMouseOver={() => highlightItem(item.id)} onClick={() => itemClicked(item.id)} className={`Demo ${hightlightedItem === item.id ? "Highlight" : ""}`}>
                                 <div className="Date">28-9-2019</div>
                                 {/*//todo de radio button moet nog gemaakt worden. probleem is dat als ik hem aanmaak, hij telkens centreert*/}
                                 <div className="TitleSong">{item.title}</div>
@@ -84,9 +95,7 @@ const Inbox = () => {
                         <button className="DeclineButton">Decline</button>
                         <div className="DescriptionContainer">
                             <span className="Description">Description</span>
-                            <div  className="TextAreaDescription">
-                                {demo.loaded ? demo.demo.description : "niks"}
-                            </div>
+                            <textarea  value={demo.loaded ? demo.demo.description : "niks"} className="TextAreaDescription" />
                         </div>
                         <div className="AnswerContainer">
                             <div id="AnswerAndSelectMessageContainer">

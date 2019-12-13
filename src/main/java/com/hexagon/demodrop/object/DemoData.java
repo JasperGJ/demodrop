@@ -5,6 +5,7 @@ import com.hexagon.demodrop.model.Demo;
 public class DemoData {
     public String artist;
     public String title;
+    public String description;
     public byte[] audio;
     public Long length;
     public String type;
@@ -18,5 +19,6 @@ public class DemoData {
         this.title = demo.getTitle();
         this.audio = demo.getAudio();
         this.status = demo.getStatus();
+        this.description = demo.getDescription();
     }
 }
