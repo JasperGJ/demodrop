@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './Profile.css';
+import foto from '../Header/hexagon.png';
 
 
 
@@ -61,7 +62,7 @@ const Profile = () => {
                         </h1>
                         {profile.data.messages.map((message, index) =>
                             <div key={index} className="Notification-Content">
-                                <div className="div1">thumbnail</div>
+                                <img src={foto} alt="hexagon thumbnail" className="HexagonThumbnail"/>
                                 <div className="Demo-Date">{message.date}</div>
                                 <div className="div3">{message.text}</div>
                                 <div className="div4"> delete demo</div>

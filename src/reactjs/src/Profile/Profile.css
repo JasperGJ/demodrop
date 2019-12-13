@@ -49,7 +49,10 @@ text-align:left; }
     text-align: left;
 }
     
-.div1 { grid-area: 1 / 1 / 2 / 2; }
+.HexagonThumbnail { grid-area: 1 / 1 / 2 / 2;
+width: 40px;
+height: 44px;
+margin: 5px 8px}
 .Demo-Date { grid-area: 1 / 6 / 2 / 7;
 display: grid }
 .div3 { grid-area: 2 / 2 / 3 / 6;
