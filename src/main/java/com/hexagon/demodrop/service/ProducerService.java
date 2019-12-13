@@ -1,14 +1,8 @@
 package com.hexagon.demodrop.service;
 
-import com.hexagon.demodrop.model.Demo;
-import com.hexagon.demodrop.model.Message;
-import com.hexagon.demodrop.model.Token;
-import com.hexagon.demodrop.model.User;
+import com.hexagon.demodrop.model.*;
 import com.hexagon.demodrop.object.ProfileData;
-import com.hexagon.demodrop.repository.DemoRepository;
-import com.hexagon.demodrop.repository.MessageRepository;
-import com.hexagon.demodrop.repository.TokenRepository;
-import com.hexagon.demodrop.repository.UserRepository;
+import com.hexagon.demodrop.repository.*;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,21 +11,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.util.Date;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ProducerService {
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
     private TokenRepository tokenRepository;
     private EmailService emailService;
     private MessageRepository messageRepository;
     private DemoRepository demoRepository;
 
-    public ProducerService(UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository, DemoRepository demoRepository) {
+    public ProducerService(UserRepository userRepository, RoleRepository roleRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository, DemoRepository demoRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
         this.messageRepository = messageRepository;
@@ -42,6 +36,9 @@ public class ProducerService {
         User user = userRepository.findByEmail(email);
         if (user != null) return false;
         user = new User(email, passwordEncoder.encode(password), false);
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleRepository.findByName("ROLE_USER"));
+        user.setRoles(roles);
         userRepository.save(user);
 
         Token token = (new Token(user.getId()));
