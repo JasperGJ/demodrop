@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import './DemoDrop.css';
-import Button from "../Components/Button/Button";
 import Error from '../Error/Error.js';
 
 
@@ -126,7 +125,7 @@ function DemoDrop() {
                 </p>
                 </div>
                 <br />
-                <Button type="submit">SUBMIT DEMO</Button>
+                <button className="SubmitButton" type="submit">SUBMIT DEMO</button>
             </form>
         </div >
     )
