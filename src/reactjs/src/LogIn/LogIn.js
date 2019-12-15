@@ -56,7 +56,7 @@ import './LogIn.css';
         <div>
             <h2 className="Login-H2">LOGIN</h2>
             {this.state.hasLoginFailed ? <div>invalid credentials</div>: <div>login succesfull </div>}
-            <div><input placeholder="USERNAME" type="email" name="username" value={this.state.username} onChange={this.handleChange} />
+            <div><input placeholder="EMAIL" type="email" name="username" value={this.state.username} onChange={this.handleChange} />
             <br />
             <input placeholder="PASSWORD" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
             </div>
