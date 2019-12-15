@@ -14,11 +14,12 @@ import './LogIn.css';
             };
             this.handleChange = this.handleChange.bind(this);
             this.loginClicked = this.loginClicked.bind(this);
+            this.resetPassword = this.resetPassword.bind(this);
         }
     
     
         handleChange(event) {
-            console.log(this.state);
+            console.log("handleChange",this.state);
             this.setState(
                 {
                     [event.target.name]
@@ -27,15 +28,16 @@ import './LogIn.css';
             )
         }
 
-    loginClicked() {
-        const data = new FormData();
-        data.append("username",this.state.username);
-        data.append("password",this.state.password);
+        loginClicked() {
+            const data = new FormData();
+            data.append("username",this.state.username);
+            data.append("password",this.state.password);
 
-        fetch("/login", {
-            method: "POST",
-            body: data
-        }).then(response => {
+            fetch("/login", {
+                method: "POST",
+                body: data
+            }).then(response => {
+                console.log("response",response)
                 if (response.status === 200){
                     return response.json();
                 }
@@ -50,8 +52,13 @@ import './LogIn.css';
             })
             .catch(e => console.warn(e))
         }
-    
-    render() {
+
+        resetPassword(){
+            console.log("reset")
+            fetch("/reset?email="+this.state.username);
+        }
+
+        render() {
     return (
         <div>
             <h2 className="Login-H2">LOGIN</h2>
@@ -60,7 +67,7 @@ import './LogIn.css';
             <br />
             <input placeholder="PASSWORD" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
             </div>
-            <a href="https://locolhost:8080/" target="_blank">forgot password?</a>
+            <button className="buttonlink" onClick={this.resetPassword}>forgot password?</button>
             <br/>
             <button className="SubmitButton" onClick={this.loginClicked}>Login</button>
         </div>

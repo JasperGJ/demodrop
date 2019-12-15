@@ -13,6 +13,7 @@ import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute'
 import Error from './Error/Error.js';
 import Inbox from './Inbox/Inbox';
 import Admin from "./Admin/Admin";
+import ChangePassword from "./ChangePassword/ChangePassword";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" exact component={LogInRegister} />
             <Route path="/index.html" exact component={LogInRegister} />
             <Route path="/loginform" component={LogIn} />
+            <Route path="/change" component={ChangePassword}/>
             <Route path="/signup">
               <SignUp />
             </Route>

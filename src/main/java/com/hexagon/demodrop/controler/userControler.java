@@ -53,7 +53,7 @@ public class userControler {
         return new RedirectView(uri);
     }
 
-    @PostMapping("/change")
+    @PostMapping("/changepassword")
     ResponseEntity<String> changePassword(String token,String password){
         userService.ChangePassword(token,password);
         return ResponseEntity.status(HttpStatus.OK).body("Mail hes been sent");

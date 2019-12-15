@@ -46,10 +46,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         HttpMethod.GET, "/index.html","/register","/static/**", "/*.js","/*.png", "/*.json", "/*.ico")
                 .permitAll()
                 .antMatchers(
-                        HttpMethod.POST, "/register","/confirm","/change")
+                        HttpMethod.POST, "/register","/confirm","/change","/changepassword")
                 .permitAll()
                 .antMatchers(
-                        HttpMethod.GET, "/confirm","/reset","/confirmreset")
+                        HttpMethod.GET, "/confirm","/reset","/confirmreset","/change")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

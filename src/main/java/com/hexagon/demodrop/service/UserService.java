@@ -108,7 +108,8 @@ public class UserService implements UserDetailsService {
             tokenRepository.deleteById(id);
 
             Token newToken = new Token(user.getId());
-            return String.format("/change?token=%s&email=%s", token.getId().toString(), user.getEmail());
+            tokenRepository.save(newToken);
+            return String.format("/change?token=%s&email=%s", newToken.getId().toString(), user.getEmail());
         }
         return "";
 
