@@ -108,7 +108,7 @@ const Inbox = () => {
 
                             <textarea className="TextAreaAnswer"/>
                         </div>
-                        <button>SEND</button>
+                        <button className="SubmitButton">SEND</button>
                     </div>
                 </div>
 

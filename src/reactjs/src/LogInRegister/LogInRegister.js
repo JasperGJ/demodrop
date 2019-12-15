@@ -5,9 +5,9 @@ import {Link } from 'react-router-dom';
 const logInRegister = () => {
     return (
         <div className="ButtonsContainer">
-            <button  className="ButtonStart"><Link to="/loginform" className="Link">LOGIN</Link></button>
+            <Link to="/loginform" className="Link"><button  className="ButtonStart">LOGIN</button></Link>
             <br/>
-            <button className="ButtonStart"><Link to="/signup" className="Link">SIGN UP</Link></button>
+            <Link to="/signup" className="Link"><button className="ButtonStart">SIGN UP</button></Link>
         </div>
     )
 };

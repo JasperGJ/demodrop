@@ -9,17 +9,3 @@ a {
     margin-top: 60px;
 }
 
-.LoginButton {
-    width:320px;
-    color: white;
-    background-color: #707070;
-    border: 3px solid white;
-    height: 2.5rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    transition: all 300ms ease-out;
-    cursor: pointer;
-    border-radius: 3px;
-    text-decoration: none;
-}

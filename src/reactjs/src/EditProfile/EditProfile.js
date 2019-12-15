@@ -107,9 +107,9 @@ function EditProfile() {
 
                     if (response.status === 200) {
 // als status 200, dan is goed gegaan en gaan we naar profile pagina
-                        alert("Gegevens zijn goed verwerkt.")
+                        alert("Gegevens zijn goed verwerkt.");
                         // TODO: redirect naar homepage
-                        window.location.href ="/profile";
+                        window.location.href = "/profile";
 
 // als niet goed, komt er alert message
                         alert("er is iets mis gegaan")
@@ -120,38 +120,35 @@ function EditProfile() {
     };
 
 // als foto file is geupload, zorgt onderstaande dat files met 'photodata' wordt gevuld
-        function onPhotoChoosen() {
-            setFiles([...photoData.current.files]);
-        }
-
-        return (
-            <div>
-                <h2>EDIT PROFILE</h2>
-                <div>
-                    <h1>Edit Profile</h1>
-                    <div>
-
-
-                        {files.length > 0 ? <img style={{
-                            margin: "10px",
-                            width: "200px",
-                            height: "200px"
-                        }} src={URL.createObjectURL(files[0])} alt="preview profile"/> : ""}
-                    </div>
-                    <form method="post" action="/profile" onSubmit={doProfile} ref={profileForm}>
-                        <p><input type="text" name="name" placeholder="enter name"/></p>
-                        <Error>{formValidation.nameError && formValidation.name}</Error>
-                        <p><textarea name="description" placeholder="enter description"/></p>
-                        <Error>{formValidation.descriptionError && formValidation.description}</Error>
-                        <p><input type="file" name="photo" onChange={onPhotoChoosen} ref={photoData}/></p>
-                        <p>{formValidation.photoError && formValidation.photo}</p>
-                        <p>
-                            <button type="submit">Update Profile</button>
-                        </p>
-                    </form>
-                </div>
-            </div>
-        )
+    function onPhotoChoosen() {
+        setFiles([...photoData.current.files]);
     }
 
-    export default EditProfile;
+    return (
+        <div>
+            <h2>EDIT PROFILE</h2>
+
+            <form method="post" action="/profile" onSubmit={doProfile} ref={profileForm}>
+                <h5>Profile Photo</h5>
+                <div>
+                    {files.length > 0 ? <img style={{
+                        margin: "10px",
+                        width: "150px",
+                        height: "150px"
+                    }} src={URL.createObjectURL(files[0])} alt="preview profile"/> : ""}
+                </div>
+                <input type="file" name="photo" onChange={onPhotoChoosen} ref={photoData}/>
+                <p>{formValidation.photoError && formValidation.photo}</p>
+                <input type="text" name="name" placeholder="ARTIST NAME"/>
+                <Error>{formValidation.nameError && formValidation.name}</Error>
+                <br/>
+                <textarea name="description" placeholder="ABOUT YOURSELF"/>
+                <Error>{formValidation.descriptionError && formValidation.description}</Error>
+                <br/>
+                <button className="SubmitButton" type="submit">Update Profile</button>
+            </form>
+        </div>
+    )
+}
+
+export default EditProfile;

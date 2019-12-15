@@ -1,57 +1,12 @@
-.EditProfilePhoto {
-        border-radius: 50%;
-        width: 70px;
-        height: 70px;
-        border: 1px solid #707070;
-        margin: 0 auto;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        display: block;
-}
+/*.EditProfilePhoto {*/
+/*        border-radius: 50%;*/
+/*        width: 70px;*/
+/*        height: 70px;*/
+/*        border: 1px solid #707070;*/
+/*        margin: 20px auto 10px;*/
+/*        display: block;*/
+/*}*/
 
-.EditProfilePhoto:hover {
-    opacity: 0.8;
-}
-
-
-/* textarea {
-    min-height: 100px;
-    width: 30vw;
-    min-width: 30vw;
-    max-width: 30vw;
-    border-radius: 3px;
-    margin-top: 10px;
-    border: none;
-    margin-bottom: 20px;
-}
-
-@media screen and (max-width: 800px)  {
-    textarea {
-    width:200px;
-    border-radius: 3px;
-    margin-top: 10px;
-    border: none;
-    margin-bottom: 20px;
-    }
-} */
-
-/* textarea {
-    width:30vw;
-    border-radius: 3px;
-    border: none;
-    padding: 5px;
-    display: block;
-    margin: 0 auto;
-    min-height: 120px;
-}
-
-@media screen and (max-width: 800px)  {
-    textarea {
-        width:200px;
-        border-radius: 3px;
-        border: none;
-        padding: 5px;
-        display: block;
-        margin: 0 auto;
-    }
-} */
+/*.EditProfilePhoto:hover {*/
+/*    opacity: 0.8;*/
+/*}*/

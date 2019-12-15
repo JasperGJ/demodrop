@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import InputText from '../Components/InputText/InputText';
 import './DemoDrop.css';
 import Button from "../Components/Button/Button";
 import Error from '../Error/Error.js';
@@ -112,11 +111,11 @@ function DemoDrop() {
             <h2>DROP DEMO</h2>
             <form method="post" action="/demodrop" onSubmit={doDropDemo} ref={demoForm}>
                 {/* <h3>{props.profile.name}</h3> */}
-                <InputText className="Input-Demodrop" name="name" placeholder=" SONG NAME" />
+                <input type="text" name="name" placeholder=" SONG NAME" />
                 {/*//todo moet voor Error componenten nog zorgen dat alleen getoond wordt bij een ongeldige invoer*/}
                 <Error>{formValidation.nameError && formValidation.name}</Error>
                 <br />
-                <textArea className="Input-Demodrop" name="description" placeholder=" DESCRIPTION" />
+                <textArea className="Input-Demodrop" name="description" placeholder="DESCRIPTION" />
                 <Error>{formValidation.descriptionError && formValidation.description}</Error>
                 <br />
                 <input type="file" name="audio" onChange={onAudioChoosen} ref={audioData} />
@@ -127,7 +126,7 @@ function DemoDrop() {
                 </p>
                 </div>
                 <br />
-                <Button type="submit" className="Demodrop-P">SUBMIT DEMO</Button>
+                <Button type="submit">SUBMIT DEMO</Button>
             </form>
         </div >
     )

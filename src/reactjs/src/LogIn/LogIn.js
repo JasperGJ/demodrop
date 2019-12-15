@@ -56,13 +56,13 @@ import './LogIn.css';
         <div>
             <h2 className="Login-H2">LOGIN</h2>
             {this.state.hasLoginFailed ? <div>invalid credentials</div>: <div>login succesfull </div>}
-            <div><input placeholder="USERNAME" type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+            <div><input placeholder="USERNAME" type="email" name="username" value={this.state.username} onChange={this.handleChange} />
             <br />
             <input placeholder="PASSWORD" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
             </div>
             <a href="https://locolhost:8080/" target="_blank">forgot password?</a>
             <br/>
-            <button onClick={this.loginClicked}>Login</button>
+            <button className="SubmitButton" onClick={this.loginClicked}>Login</button>
         </div>
    )}
 }

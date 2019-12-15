@@ -75,6 +75,11 @@ select {
     display: block;
     margin-bottom: 5px;
 }
+.DeclineButton:hover, .AcceptButton:hover {
+    color: white;
+    background-color: #222;
+    border: 3px solid white;
+}
 
 .TextAreaDescription, .TextAreaAnswer {
     height: 10px;
