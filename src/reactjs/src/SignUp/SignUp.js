@@ -21,7 +21,8 @@ function SignUp() {
 
     // noinspection HtmlUnknownTarget
     return (
-        <div>
+        // css van ComponentContainer staat in App.css
+        <div className="ComponentContainer">
             <form method="post" action="/register" onSubmit={doRegister} ref={registerRef}>
             <h2 className="SignupH2">SIGN UP</h2>
                 <p><input type="email" name="email" placeholder="EMAIL"/></p>

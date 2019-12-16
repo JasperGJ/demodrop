@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Profile.css';
 import foto from '../Header/hexagon.png';
+import Nav from '../Nav/Nav.js';
 
 
 
@@ -43,6 +44,7 @@ const Profile = () => {
     return (
 
         <div>
+            <Nav/>
 
             {profile.loaded ?
                 <div className="Container">

@@ -4,7 +4,6 @@ import Header from './Header/Header';
 import LogInRegister from './LogInRegister/LogInRegister';
 import LogIn from './LogIn/LogIn';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Nav from './Nav/Nav';
 import SignUp from './SignUp/SignUp';
 import DemoDrop from './DemoDrop/DemoDrop';
 import Profile from './Profile/Profile';
@@ -22,7 +21,6 @@ function App() {
       <div className="App">
         <Router>
           <Header  />
-          <Nav />
 
           <Switch>
             <Route path="/" exact component={LogInRegister} />

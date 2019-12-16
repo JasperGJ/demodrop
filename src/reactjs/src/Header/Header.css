@@ -9,16 +9,19 @@ h1 {
     margin-bottom: 0;
 }
 
-.LogLinks {
-    display: inline-block;
+.LogLinksContainer {
     text-align: right;
-    background-position: 100%;
+}
+
+.LogLinks {
+    font-size: 0.9rem;
+    text-align: right;
     margin: 0;
     padding-right: 20px;
     padding-bottom: 3px;
 }
 
-.LogLinks li {
+.LogLinks {
     margin: 0;
     padding-bottom: 5px;
 }
@@ -45,7 +48,7 @@ h1 {
 
 @media screen and (max-width: 465px) {
 
-    img {
+    .HexagonImg {
         display: none;
     }
 

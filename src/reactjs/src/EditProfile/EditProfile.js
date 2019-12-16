@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 import './EditProfile.css';
 import Error from "../Error/Error";
+import Nav from '../Nav/Nav.js';
 
 function EditProfile() {
     const photoData = useRef(null);
@@ -126,6 +127,7 @@ function EditProfile() {
 
     return (
         <div>
+            <Nav/>
             <h2>EDIT PROFILE</h2>
 
             <form method="post" action="/profile" onSubmit={doProfile} ref={profileForm}>

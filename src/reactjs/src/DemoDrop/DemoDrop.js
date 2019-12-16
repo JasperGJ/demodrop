@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './DemoDrop.css';
 import Error from '../Error/Error.js';
+import Nav from '../Nav/Nav'
 
 
 function DemoDrop() {
@@ -106,8 +107,10 @@ function DemoDrop() {
     };
 
     return (
+        <div>
+            <Nav/>
         <div className="Demodrop-Container">
-            <h2>DROP DEMO</h2>
+             <h2>DROP DEMO</h2>
             <form method="post" action="/demodrop" onSubmit={doDropDemo} ref={demoForm}>
                 {/* <h3>{props.profile.name}</h3> */}
                 <input type="text" name="name" placeholder=" SONG NAME" />
@@ -128,6 +131,7 @@ function DemoDrop() {
                 <button className="SubmitButton" type="submit">SUBMIT DEMO</button>
             </form>
         </div >
+        </div>
     )
 
 }

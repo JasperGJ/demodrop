@@ -13,15 +13,15 @@ const header = (props) => {
         <div className="ContainerHeader">
             <h1 className="HeaderLeft">HEXAGON</h1>
             <img className="HexagonImg" src={logo} alt="hexagon"/>
-            <h1 className="HeaderRight">Demo Drop</h1>
+            <h1 className="HeaderRight">DEMO DROP</h1>
             {/*{props.loggedIn? <Link to = {props.setLoggedIn}>log out</Link>: ''}*/}
-            <ul className="LogLinks">
-                {!isUserLoggedIn && <li><Link to="/loginform">Login</Link></li>}
-                {isUserLoggedIn && <li><Link to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
-            </ul>
+            {/*<div className="LogLinksContainer">*/}
+            <div>
+                {!isUserLoggedIn && <Link to="/loginform" className="LogLinks">Login</Link>}
+                {isUserLoggedIn && <Link to="/logout" className="LogLinks" onClick={AuthenticationService.logout}>Logout</Link>}
+            </div>
         </div>
-    </div>
-    )
+    </div>)
 };
 
 export default header;

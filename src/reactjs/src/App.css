@@ -8,6 +8,14 @@
   box-sizing: border-box;
 }
 
+.ComponentContainer {
+  padding-top: 100px;
+}
+
+.ComponentContainerInbox, .ComponentContainerAdmin {
+  margin-top: 50px;
+}
+
 .SubmitButton {
   width:320px;
   color: white;

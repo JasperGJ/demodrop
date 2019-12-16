@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Nav.css';
 import AuthenticationService from '../AuthenticationService/AuthenticationService.js';
 import { withRouter } from 'react-router-dom';
@@ -16,9 +16,9 @@ import { withRouter } from 'react-router-dom';
         <nav>
             <div className="Nav">
                 <ul>
-                    {isUserLoggedIn && <li> <Link to="/profile" >Profile</Link></li>}
-                    {isUserLoggedIn && <li> <Link to="/editprofile" >Edit Profile</Link></li>}
-                    {isUserLoggedIn && <li> <Link to="/demodrop">Demo Drop</Link></li>}
+                    {isUserLoggedIn && <li> <NavLink className="NavItem" activeClassName="selected" to="/profile" exact="true">Profile</NavLink></li>}
+                    {isUserLoggedIn && <li> <NavLink className="NavItem" activeClassName="selected" to="/editprofile" exact="true" >Edit Profile</NavLink></li>}
+                    {isUserLoggedIn && <li> <NavLink className="NavItem" activeClassName="selected" to="/demodrop">Demo Drop</NavLink></li>}
                 </ul>
             </div>
         </nav>

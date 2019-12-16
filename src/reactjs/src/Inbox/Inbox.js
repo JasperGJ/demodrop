@@ -66,7 +66,8 @@ const Inbox = () => {
     console.log("demo",demo);
 
     return (
-        <div>
+        // css van ComponentContainerInbox staat in App.css
+        <div className="ComponentContainerInbox">
             <div className="InboxContainer">
                 <div className="BoxDemos">
                     <h2 className="InboxH2">INBOX DEMOS</h2>
