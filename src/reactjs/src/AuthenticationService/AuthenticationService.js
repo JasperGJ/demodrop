@@ -17,7 +17,6 @@ class AuthenticationService {
     }
 
     isUserLoggedIn() {
-        return true;
         let user = sessionStorage.getItem('authenticatedUser');
         return user !== null
     }

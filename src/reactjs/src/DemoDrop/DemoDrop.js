@@ -95,8 +95,8 @@ function DemoDrop() {
             })
                 .then(response => {
                     console.log("getProfile", response);
-                    if (response.status === 200) alert("Yes Gelukt");
-                    else alert("Er is iets mis gegaan!");
+                    if (response.status === 200) alert("Thank you for uploading your demo. We'll get back to you within five days");
+                    else alert("Sorry, something went wrong!");
                 })
                 .catch(e => console.warn(e));
         }
@@ -118,14 +118,18 @@ function DemoDrop() {
                     {/*//todo Als formaValidation.formValid false is, maar er geen nameError is, dan moet er ook geen <Error>*/}
                     { !formValidation.nameError ?
                         "" :
-                        <Error>{formValidation.nameError && formValidation.name}</Error>}
+                        <Error>{formValidation.name}</Error>}
                     <br/>
-                    <textArea className="Input-Demodrop" name="description" placeholder="DESCRIPTION"/>
+                    <textArea className="Input-Demodrop" name="description" placeholder="DESCRIPTION (MIN 20 CHARACTERS)"/>
                     { !formValidation.descriptionError ?
                         "" :
                         <Error>{formValidation.descriptionError && formValidation.description}</Error>}
                     <br/>
-                    <input type="file" name="audio" onChange={onAudioChoosen} ref={audioData}/>
+                    <div>
+                        <label for="files" className="btn">Upload mp3</label>
+                        <input  type="file" accept=".mp3"  name="audio" onChange={onAudioChoosen} ref={audioData}/>
+                    </div>
+
                     { !formValidation.audioError ?
                         "" :
                         <Error>{formValidation.audioError && formValidation.audio}</Error>}

@@ -4,6 +4,7 @@ import com.hexagon.demodrop.model.Message;
 import com.hexagon.demodrop.model.User;
 import com.hexagon.demodrop.model.Token;
 import com.hexagon.demodrop.object.LoginData;
+import com.hexagon.demodrop.repository.MessageRepository;
 import com.hexagon.demodrop.repository.TokenRepository;
 import com.hexagon.demodrop.repository.UserRepository;
 import org.imgscalr.Scalr;
@@ -30,15 +31,16 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     private TokenRepository tokenRepository;
     private EmailService emailService;
+    private MessageRepository messageRepository;
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     //@Autowired
-    public UserService(UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService) {
+    public UserService(UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository) {
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
+        this.messageRepository = messageRepository;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -65,6 +67,9 @@ public class UserService implements UserDetailsService {
         user.setDescription(description);
         user.setPhoto(file.getBytes());
         user.setThumbnail(createThumbnail(file, 100).toByteArray());
+        Message message = new Message("Congratulations", "You updated your profile", user);
+        messageRepository.save(message);
+        user.getMessages().add(message);
         userRepository.save(user);
         return true;
     }

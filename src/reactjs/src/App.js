@@ -34,11 +34,10 @@ function App() {
             <AuthenticatedRoute path="/profile" component={Profile} />
             <AuthenticatedRoute path="/editprofile" component={EditProfile} />
             <AuthenticatedRoute path="/demodrop" component={DemoDrop} />
-            {/*//todo voor onderstaande pagina moet Nav(profile etc.) van producer niet verschijnen*/}
             <AuthenticatedRoute path="/backoffice" component={Inbox} />
             <AuthenticatedRoute path="/admin" component={Admin} />
             <Route>
-              <Error>an error occurred</Error>
+              <Error>404 Page Not Found</Error>
             </Route>
           </Switch >
         </Router>

@@ -60,14 +60,15 @@ const Profile = () => {
                     </div>
                     <div className="Notifications">
                         <h1>
-                            {profile.data.name}
+                            Notifications: {profile.data.name}
                         </h1>
                         {profile.data.messages.map((message, index) =>
                             <div key={index} className="Notification-Content">
                                 <img src={foto} alt="hexagon thumbnail" className="HexagonThumbnail"/>
-                                <div className="Demo-Date">{message.date}</div>
+                                <span><strong>{message.title}</strong></span>
+                                <div className="Demo-Date">{new Date(message.date).toLocaleDateString()}</div>
                                 <div className="div3">{message.text}</div>
-                                <div className="div4"> delete demo</div>
+                                {/*<div className="div4"> delete demo</div>*/}
                             </div>
                         )}
 

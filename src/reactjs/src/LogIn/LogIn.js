@@ -66,7 +66,7 @@ class Login extends Component {
             // css van ComponentContainer staat in App.css
             <div className="ComponentContainer">
                 <h2 className="Login-H2">LOGIN</h2>
-                {this.state.hasLoginFailed ? <div>invalid credentials</div> : <div>login succesfull </div>}
+                {this.state.hasLoginFailed ? <div>invalid credentials</div> : ""}
                 <div><input placeholder="EMAIL" type="email" name="username" value={this.state.username}
                             onChange={this.handleChange}/>
                     <br/>
