@@ -30,8 +30,8 @@ public class ProducerControler {
     }
 
     @PostMapping("/register")
-    ResponseEntity<String> loginFailure(@RequestParam("email") String email,
-                                           @RequestParam("password") String password) {
+    ResponseEntity<String> register(@RequestParam("email") String email,
+                                    @RequestParam("password") String password) {
         if (producerService.createUser(email,password))
             return ResponseEntity.status(HttpStatus.OK).body("check your mail");
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Fail");
