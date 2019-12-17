@@ -46,6 +46,10 @@ h1 {
     margin-left: 50px;
 }
 
+.test {
+    display: inline-block;
+}
+
 @media screen and (max-width: 465px) {
 
     .HexagonImg {

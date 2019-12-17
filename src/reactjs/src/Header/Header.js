@@ -11,8 +11,11 @@ const header = (props) => {
     <div>
         <div className="ContainerHeader">
             <h1 className="HeaderLeft">HEXAGON</h1>
-            <a href="/index.html"><img className="HexagonImg" src={logo} alt="hexagon"/></a>
+            <div className="test">
+                <a href="/index.html"><img className="HexagonImg" src={logo} alt="hexagon"/></a>
+            </div>
             <h1 className="HeaderRight">DEMO DROP</h1>
+
             {/*{props.loggedIn? <Link to = {props.setLoggedIn}>log out</Link>: ''}*/}
             {/*<div className="LogLinksContainer">*/}
             <div>
