@@ -11,8 +11,12 @@ h5 {
     grid-row-gap: 0;
     margin: 0 50px;
 }
+
 .Highlight {
     background-color: rgb(188, 185, 236);
+}
+.Selected {
+    background-color: rgb(0, 0, 236);
 }
 /*grid1 bestaande uit 1 kolom*/
 .BoxDemos {
@@ -52,7 +56,7 @@ select {
     display: inline;
 }
 
-.DeclineButton, .AcceptButton {
+.DeclineButton, .AcceptButton, .StartButton {
     border-radius: 10px;
     width:220px;
     font-size: 16px;
@@ -68,6 +72,10 @@ select {
     text-decoration: none;
 }
 .AcceptButton {
+    margin-right: 250px;
+}
+
+.StartButton {
     margin-right: 250px;
 }
 
