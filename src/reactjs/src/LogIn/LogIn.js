@@ -44,7 +44,7 @@ class Login extends Component {
             this.setState({showSuccesMessage: false});
         })
             .then(json => {
-                AuthenticationService.registerSuccesfulLogin(this.state.username, this.state.password);
+                AuthenticationService.registerSuccesfulLogin(this.state.username, json.role);
                 this.props.history.push(`${json.role}`);
                 this.setState({showSuccesMessage: true});
                 this.setState({hasLoginFailed: false})
@@ -54,7 +54,11 @@ class Login extends Component {
 
     resetPassword() {
         console.log("reset")
-        fetch("/reset?email=" + this.state.username);
+        fetch("/reset?email=" + this.state.username)
+            .then(responce => {
+                alert("Check your mail");
+                this.props.history.push("/");
+            });
     }
 
     render() {

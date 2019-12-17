@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 import AuthenticationService from "../AuthenticationService/AuthenticationService";
 
 const header = (props) => {
-    console.log('hello', props);
     const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
     return (

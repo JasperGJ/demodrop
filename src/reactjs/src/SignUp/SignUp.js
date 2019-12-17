@@ -1,10 +1,10 @@
-import React,{useRef} from 'react';
+import React from 'react';
 import './SignUp.css';
 
 
 function SignUp() {
 
-    const registerRef = useRef(null);
+    const registerRef = React.useRef(null);
 
     const doRegister = (event)=>{
         event.preventDefault();

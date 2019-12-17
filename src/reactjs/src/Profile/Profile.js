@@ -50,7 +50,7 @@ const Profile = () => {
                 <div className="Container">
                     <div>
                         <img className="Profile-Photo" src={`data:image/png;base64,${profile.data.photo}`}
-                             alt="profile photo"/>
+                             alt="profile "/>
                         <div className="Profile">
                             <h2 >About</h2>
                             <p className="About">

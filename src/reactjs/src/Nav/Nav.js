@@ -10,15 +10,17 @@ import { withRouter } from 'react-router-dom';
 
         render() {
     const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+    const home = AuthenticationService.getUserHome();
     console.log("userloggedin" + isUserLoggedIn);
 
     return (
         <nav>
             <div className="Nav">
                 <ul>
-                    {isUserLoggedIn && <li> <NavLink className="NavItem" activeClassName="selected" to="/profile" exact="true">Profile</NavLink></li>}
+                    {home === "/profile" && <li> <NavLink className="NavItem" activeClassName="selected" to="/profile" exact="true">Profile</NavLink></li>}
                     {isUserLoggedIn && <li> <NavLink className="NavItem" activeClassName="selected" to="/editprofile" exact="true" >Edit Profile</NavLink></li>}
                     {isUserLoggedIn && <li> <NavLink className="NavItem" activeClassName="selected" to="/demodrop">Demo Drop</NavLink></li>}
+
                 </ul>
             </div>
         </nav>

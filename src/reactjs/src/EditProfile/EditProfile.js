@@ -3,7 +3,7 @@ import './EditProfile.css';
 import Error from "../Error/Error";
 import Nav from '../Nav/Nav.js';
 
-function EditProfile() {
+function EditProfile(props) {
     const photoData = useRef(null);
     const profileForm = useRef(null);
     const [files, setFiles] = useState([]);
@@ -38,7 +38,6 @@ function EditProfile() {
                 errors.nameError = true;
                 errors.formValid = false;
             }
-            console.log("Check", key, errors);
         }
 
         if (key === "description") {
@@ -65,17 +64,14 @@ function EditProfile() {
                 errors.photo = "Photo can not be empty";
                 errors.photoError = true;
                 errors.formValid = false;
-                console.log("Check length", key, errors);
             }
         }
     };
 
     const validateForm = (profile) => {
         errors.formValid = true;
-        console.log("errors before", errors);
 
         [...profile.entries()].map(field => validateField(field[0], field[1]));
-        console.log("errors after", errors);
         setFormValidation(errors);
 
         return errors.formValid;
@@ -104,17 +100,16 @@ function EditProfile() {
             })
                 //als we reactie van server terug hebben, gaan we verder
                 .then(response => {
-                    console.log("getProfile", response);
-
                     if (response.status === 200) {
 // als status 200, dan is goed gegaan en gaan we naar profile pagina
                         alert("Gegevens zijn goed verwerkt.");
-                        // TODO: redirect naar homepage
-                        window.location.href = "/profile";
-
+                        props.location.push("/profile")
+                    } else
+                    {
 // als niet goed, komt er alert message
                         alert("er is iets mis gegaan")
                     }
+
                 })
                 .catch(e => console.warn(e));
         }

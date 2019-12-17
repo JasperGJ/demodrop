@@ -1,17 +1,30 @@
 class AuthenticationService {
-    registerSuccesfulLogin(username, password) {
+    registerSuccesfulLogin(username, home) {
         console.log("registerSuccesfulLogin");
         sessionStorage.setItem('authenticatedUser', username);
+        sessionStorage.setItem('userhome', home);
     }
 
 
-    logout() {
+     logout() {
         sessionStorage.removeItem('authenticatedUser');
+         fetch("/logout",{
+            method: "POST"
+        })
+            .then(responce => {
+                console.log("logout",responce,responce.url);
+             });
     }
 
     isUserLoggedIn() {
+        return true;
         let user = sessionStorage.getItem('authenticatedUser');
         return user !== null
+    }
+
+    getUserHome() {
+        let home = sessionStorage.getItem('userhome');
+        return home;
     }
 }
 

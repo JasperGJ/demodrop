@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, {useState,useEffect} from 'react';
 import './App.css';
 import Header from './Header/Header';
 import LogInRegister from './LogInRegister/LogInRegister';
@@ -26,6 +26,7 @@ function App() {
             <Route path="/" exact component={LogInRegister} />
             <Route path="/index.html" exact component={LogInRegister} />
             <Route path="/loginform" component={LogIn} />
+            <Route path="/logout" component={LogIn} />
             <Route path="/change" component={ChangePassword}/>
             <Route path="/signup">
               <SignUp />
@@ -36,7 +37,7 @@ function App() {
             {/*//todo voor onderstaande pagina moet Nav(profile etc.) van producer niet verschijnen*/}
             <AuthenticatedRoute path="/backoffice" component={Inbox} />
             <AuthenticatedRoute path="/admin" component={Admin} />
-            <Route component>
+            <Route>
               <Error>an error occurred</Error>
             </Route>
           </Switch >
