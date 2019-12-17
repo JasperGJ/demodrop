@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 import './DemoDrop.css';
 import Error from '../Error/Error.js';
 import Nav from '../Nav/Nav'
@@ -14,9 +14,9 @@ function DemoDrop() {
         name: "",
         description: "",
         audio: "",
-        nameError: true,
-        descriptionError: true,
-        audioError: true,
+        nameError: false,
+        descriptionError: false,
+        audioError: false,
         formValid: true
     });
     const errors = {};
@@ -80,12 +80,13 @@ function DemoDrop() {
         return errors.formValid;
     };
 
-        const doDropDemo = (event) => {
+    const doDropDemo = (event) => {
 
         event.preventDefault();
 
         const formdata = new FormData(demoForm.current);
 
+        // als uit de functie validateForm blijkt dat een veld niet juist is ingevuld, dan stopt het hier. Als wel goed, dan gaat de functie verder
         if (validateForm(formdata)) {
 
             fetch(demoForm.current.action, {
@@ -109,28 +110,34 @@ function DemoDrop() {
     return (
         <div>
             <Nav/>
-        <div className="Demodrop-Container">
-             <h2>DROP DEMO</h2>
-            <form method="post" action="/demodrop" onSubmit={doDropDemo} ref={demoForm}>
-                {/* <h3>{props.profile.name}</h3> */}
-                <input type="text" name="name" placeholder=" SONG NAME" />
-                {/*//todo moet voor Error componenten nog zorgen dat alleen getoond wordt bij een ongeldige invoer*/}
-                <Error>{formValidation.nameError && formValidation.name}</Error>
-                <br />
-                <textArea className="Input-Demodrop" name="description" placeholder="DESCRIPTION" />
-                <Error>{formValidation.descriptionError && formValidation.description}</Error>
-                <br />
-                <input type="file" name="audio" onChange={onAudioChoosen} ref={audioData} />
-                <Error>{formValidation.audioError && formValidation.audio}</Error>
-                <div className="DemoBelongToHexagon">
-                    <p>All demos are automatically submitted for the HEXAGON record
-                        label and Don Diablo's radio show unless otherwise specified
-                </p>
-                </div>
-                <br />
-                <button className="SubmitButton" type="submit">SUBMIT DEMO</button>
-            </form>
-        </div >
+            <div className="Demodrop-Container">
+                <h2>DROP DEMO</h2>
+                <form method="post" action="/demodrop" onSubmit={doDropDemo} ref={demoForm}>
+                    {/* <h3>{props.profile.name}</h3> */}
+                    <input type="text" name="name" placeholder=" SONG NAME"/>
+                    {/*//todo Als formaValidation.formValid false is, maar er geen nameError is, dan moet er ook geen <Error>*/}
+                    { !formValidation.nameError ?
+                        "" :
+                        <Error>{formValidation.nameError && formValidation.name}</Error>}
+                    <br/>
+                    <textArea className="Input-Demodrop" name="description" placeholder="DESCRIPTION"/>
+                    { !formValidation.descriptionError ?
+                        "" :
+                        <Error>{formValidation.descriptionError && formValidation.description}</Error>}
+                    <br/>
+                    <input type="file" name="audio" onChange={onAudioChoosen} ref={audioData}/>
+                    { !formValidation.audioError ?
+                        "" :
+                        <Error>{formValidation.audioError && formValidation.audio}</Error>}
+                    <div className="DemoBelongToHexagon">
+                        <p>All demos are automatically submitted for the HEXAGON record
+                            label and Don Diablo's radio show unless otherwise specified
+                        </p>
+                    </div>
+                    <br/>
+                    <button className="SubmitButton" type="submit">SUBMIT DEMO</button>
+                </form>
+            </div>
         </div>
     )
 
