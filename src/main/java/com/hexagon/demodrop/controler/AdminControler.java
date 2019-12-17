@@ -26,7 +26,7 @@ public class AdminControler {
 
     @PostMapping("/template/{id}")
     ResponseEntity<String>  saveTemplate(
-            @RequestParam("id") Long id,
+            @PathVariable("id") Long id,
             @RequestParam("status") String status,
             @RequestParam("comment") String comment,
             @AuthenticationPrincipal UserDetails user) throws NotFoundException {
@@ -37,7 +37,7 @@ public class AdminControler {
 
     @DeleteMapping("/template/{id}")
     ResponseEntity<String> deleteTemplate(
-            @PathVariable("id") long id) throws NotFoundException {
+            @PathVariable("id") Long id) throws NotFoundException {
         if (adminService.deleteTemplate(id))
         return ResponseEntity.ok("Success");
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not exists");

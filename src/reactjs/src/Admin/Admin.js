@@ -13,12 +13,12 @@ function Admin(){
     const createUser = (event)=>{
         event.preventDefault();
         const data = new FormData(createUserRef.current);
-        fetch(createUserRef.current["action"],{
-            method: createUserRef.current["method"],
+        fetch("/createuser",{
+            method: "POST",
             body : data
         }).then(response => {
                 if (response.status === 200) alert("Check your mail... ");
-                else alert("er is iets mis gegaan!");
+                else alert("Something went wrong!");
             }
         )
     };
@@ -46,7 +46,7 @@ function Admin(){
             body : data
         }).then(response => {
                 if (response.status === 200) alert("Template is added... ");
-                else alert("er is iets mis gegaan!");
+                else alert("Something went wrong!");
             }
         )
 
@@ -57,7 +57,7 @@ function Admin(){
             method: "DELETE"
         }).then(response => {
             if (response.status === 200) alert("Template is deleted... ");
-            else alert("er is iets mis gegaan!");
+            else alert("Something went wrong!");
         }).catch(e => console.warn(e))
 
     };
