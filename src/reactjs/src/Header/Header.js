@@ -11,7 +11,7 @@ const header = (props) => {
     <div>
         <div className="ContainerHeader">
             <h1 className="HeaderLeft">HEXAGON</h1>
-            <div className="test">
+            <div className="LogoLink">
                 <a href="/index.html"><img className="HexagonImg" src={logo} alt="hexagon"/></a>
             </div>
             <h1 className="HeaderRight">DEMO DROP</h1>
