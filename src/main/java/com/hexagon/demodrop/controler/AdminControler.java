@@ -34,7 +34,7 @@ public class AdminControler {
             @AuthenticationPrincipal UserDetails user) throws NotFoundException {
        if (adminService.saveTemplate(id, comment, status))
         return ResponseEntity.ok("Success");
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not exists");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User doesn't exists");
     }
 
     @DeleteMapping("/template/{id}")
