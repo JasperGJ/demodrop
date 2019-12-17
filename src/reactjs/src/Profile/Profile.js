@@ -52,8 +52,8 @@ const Profile = () => {
                         <img className="Profile-Photo" src={`data:image/png;base64,${profile.data.photo}`}
                              alt="profile photo"/>
                         <div className="Profile">
-                            <h2>About</h2>
-                            <p>
+                            <h2 >About</h2>
+                            <p className="About">
                                 {profile.data.description}
                             </p>
                         </div>
