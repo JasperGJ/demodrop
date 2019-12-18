@@ -7,6 +7,7 @@ const Inbox = () => {
     const [selectedDemo, setSelectedDemo] = useState(-1);
     const [comment, setComments] = useState("");
     const [status, setStatus] = useState("");
+    const [name, setName] = useState("");
 
     const [templates, setTemplates] = useState([]);
     const [opts, setOpts] = useState([]);
@@ -32,7 +33,7 @@ const Inbox = () => {
     };
 
     const select = (event) => {
-        setComments(event.target.value);
+        setComments("Hello dear "+ name + event.target.value);
     };
 
     const accept = () => {
@@ -40,7 +41,7 @@ const Inbox = () => {
         const optsArray =
             templates.filter(template => template.status === "ACCEPT");
         setOpts(optsArray.map((template, index) => <option key={index}>{template.comment}</option>));
-        setComments(optsArray[0].comment);
+        setComments("Hello dear "+ name+ optsArray[0].comment);
     };
 
     const decline = () => {
@@ -48,7 +49,8 @@ const Inbox = () => {
         const optsArray =
             templates.filter(template => template.status === "DECLINE");
         setOpts(optsArray.map((template, index) => <option key={index}>{template.comment}</option>));
-        setComments(optsArray[0].comment);
+        const name = inbox.data.items[selectedDemo].artist;
+        setComments("Hello dear "+ name+  optsArray[0].comment);
     };
 
     const start = () => {
@@ -114,9 +116,11 @@ const Inbox = () => {
         setHightlight(index);
     };
 
-    const itemClicked = (index) => {
-        setSelectedDemo(index);
-        getDemo(index);
+    const itemClicked = (id,index) => {
+        setSelectedDemo(id);
+        console.log(index,inbox.data.items);
+        setName(inbox.data.items[index].artist);
+        getDemo(id);
     };
 
     return (
@@ -130,11 +134,11 @@ const Inbox = () => {
                     <div className="DemoInfo">
                         {inbox.loaded
                             ?
-                            inbox.data.items.map((item) =>
+                            inbox.data.items.map((item,index) =>
                                 <div key={item.id}
                                      onMouseLeave={() => highlightItem(-1)}
                                      onMouseOver={() => highlightItem(item.id)}
-                                     onClick={() => itemClicked(item.id)}
+                                     onClick={() => itemClicked(item.id,index)}
                                      className={
                                          selectedDemo === item.id
                                              ? "Demo Selected"
@@ -152,8 +156,7 @@ const Inbox = () => {
                                     </div>
                                     <div className="StatusTitleSong">
                                         <div className="Status">Status: {item.status}</div>
-                                        {/*//todo de radio button moet nog gemaakt worden. probleem is dat als ik hem aanmaak, hij telkens centreert*/}
-                                        <div className="TitleSong">Title: {item.title}</div>
+                                         <div className="TitleSong">Title: {item.title}</div>
                                     </div>
                                 </div>
                             )
