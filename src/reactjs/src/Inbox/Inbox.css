@@ -71,12 +71,8 @@ select {
     cursor: pointer;
     text-decoration: none;
 }
-.AcceptButton {
-    margin-right: 250px;
-}
-
-.StartButton {
-    margin-right: 250px;
+.DeclineButton {
+    margin-left: 100px;
 }
 
 .Description {
@@ -122,3 +118,30 @@ select {
     margin-bottom: 5px;
 }
 
+.Artist {
+    text-align: left;
+}
+
+.Status {
+    text-align: left;
+}
+
+.Thumbnail {
+    text-align: left;
+}
+
+.PhotoArtistDate {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.StatusTitleSong {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
