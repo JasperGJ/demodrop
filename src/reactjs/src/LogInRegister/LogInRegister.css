@@ -23,8 +23,11 @@
     border: 2px solid white;
   }
 
-  .Link {
-     text-decoration: none;
-  }
+@media screen and (max-width: 500px)  {
+    .ButtonStart  {
+        width:230px;
+    }
+}
+
 
 

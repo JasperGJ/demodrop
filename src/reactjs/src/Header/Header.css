@@ -50,7 +50,7 @@ h1 {
     display: inline-block;
 }
 
-@media screen and (max-width: 465px) {
+@media screen and (max-width: 500px) {
 
     .HexagonImg {
         display: none;
