@@ -4,6 +4,7 @@ import com.hexagon.demodrop.model.Role;
 import com.hexagon.demodrop.model.User;
 import com.hexagon.demodrop.repository.RoleRepository;
 import com.hexagon.demodrop.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -19,10 +20,14 @@ public class InitialDataBaseUsers implements ApplicationListener<ContextRefreshe
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private String adminEmail;
 
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-    public InitialDataBaseUsers(UserRepository userRepository, RoleRepository roleRepository) {
+    public InitialDataBaseUsers(@Value("${cust.adminEmail}") String adminEmail,
+                                UserRepository userRepository,
+                                RoleRepository roleRepository) {
+        this.adminEmail = adminEmail;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -35,7 +40,7 @@ public class InitialDataBaseUsers implements ApplicationListener<ContextRefreshe
         List<Role> roles = new ArrayList<>();
 
         User user = new User(
-                "admin@hexagon.com",
+                adminEmail,
                 passwordEncoder.encode("secret"),
                 true);
         roles.add(roleRepository.findByName("ROLE_USER"));
