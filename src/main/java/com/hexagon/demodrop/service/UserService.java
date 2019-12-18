@@ -9,6 +9,7 @@ import com.hexagon.demodrop.repository.TokenRepository;
 import com.hexagon.demodrop.repository.UserRepository;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,6 +29,7 @@ import java.util.UUID;
 @Service
 public class UserService implements UserDetailsService {
 
+    private String hostname;
     private UserRepository userRepository;
     private TokenRepository tokenRepository;
     private EmailService emailService;
@@ -35,11 +37,13 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     //@Autowired
-    public UserService(UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository) {
+    public UserService(@Value("${cust.hostname}")String hostname,
+                       UserRepository userRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository) {
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
         this.messageRepository = messageRepository;
+        this.hostname = hostname;
     }
 
     @Override
@@ -92,7 +96,10 @@ public class UserService implements UserDetailsService {
 
         emailService.sendMail(
                 "Password Reset",
-                "Hexagonian,\n You've requested a password reset.\n Click the link below to reset your password.\n http://localhost:8080/confirmreset?token=" + token.getId() + "\nIf you didn't request a reset you can ignore this email.",
+                "Hexagonian," +
+                        "\n You've requested a password reset.\n Click the link below to reset your password." +
+                        "\n "+hostname+"/confirmreset?token=" + token.getId() + "" +
+                        "\nIf you didn't request a reset you can ignore this email.",
                 user.getEmail());
         return false;
     }

@@ -3,6 +3,7 @@ package com.hexagon.demodrop.service;
 import com.hexagon.demodrop.model.*;
 import com.hexagon.demodrop.object.ProfileData;
 import com.hexagon.demodrop.repository.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ import java.util.*;
 @Service
 public class ProducerService {
     private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    private String hostname;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private TokenRepository tokenRepository;
@@ -23,13 +25,15 @@ public class ProducerService {
     private MessageRepository messageRepository;
     private DemoRepository demoRepository;
 
-    public ProducerService(UserRepository userRepository, RoleRepository roleRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository, DemoRepository demoRepository) {
+    public ProducerService(@Value("${cust.hostname}")String hostname,
+                           UserRepository userRepository, RoleRepository roleRepository, TokenRepository tokenRepository, EmailService emailService, MessageRepository messageRepository, DemoRepository demoRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.tokenRepository = tokenRepository;
         this.emailService = emailService;
         this.messageRepository = messageRepository;
         this.demoRepository = demoRepository;
+        this.hostname = hostname;
     }
 
     public boolean createUser(String email, String password) {
@@ -46,7 +50,7 @@ public class ProducerService {
 
         emailService.sendMail(
                 "Welcome to Hexagon",
-                "Click on the link to confirm you registration: http://localhost:8080/confirm?token=" + token.getId(),
+                "Click on the link to confirm you registration: "+hostname+"/confirm?token=" + token.getId(),
                 user.getEmail());
 
         return true;
