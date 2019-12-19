@@ -30,7 +30,7 @@ function DemoDrop() {
 
             if (value.length === 0) {
 
-                errors.name = "Songname can not be empty";
+                errors.name = "Song Name can not be empty";
                 errors.nameError = true;
                 errors.formValid = false;
             }
@@ -42,7 +42,7 @@ function DemoDrop() {
             errors.formValid = errors.formValid && true;
 
             if (value.length < 20) {
-                errors.description = "To short...write more";
+                errors.description = "A minimum of 20 characters is required";
                 errors.descriptionError = true;
                 errors.formValid = false;
                 console.log("Check", key, errors);
@@ -115,7 +115,6 @@ function DemoDrop() {
                 <form method="post" action="/demodrop" onSubmit={doDropDemo} ref={demoForm}>
                     {/* <h3>{props.profile.name}</h3> */}
                     <input type="text" name="name" placeholder=" SONG NAME"/>
-                    {/*//todo Als formaValidation.formValid false is, maar er geen nameError is, dan moet er ook geen <Error>*/}
                     { !formValidation.nameError ?
                         "" :
                         <Error>{formValidation.name}</Error>}

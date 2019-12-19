@@ -161,7 +161,7 @@ const Inbox = () => {
                                 </div>
                             )
                             :
-                            <div>ophalen</div>
+                            <div>getting demos</div>
                         }
                     </div>
                 </div>
@@ -181,7 +181,7 @@ const Inbox = () => {
                         <button className="DeclineButton" onClick={decline}>Decline</button>
                         <div className="DescriptionContainer">
                             <span className="Description">Description</span>
-                            <textarea value={demo.loaded ? demo.demo.description : "niks"}
+                            <textarea value={demo.loaded ? demo.demo.description : "nothing"}
                                       className="TextAreaDescription"/>
                         </div>
                         <div className="AnswerContainer">

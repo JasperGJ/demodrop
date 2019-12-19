@@ -9,8 +9,8 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            hasLoginFailed: false,
-            showSuccesMessage: false
+            hasLoginFailed: false
+            // showSuccesMessage: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.loginClicked = this.loginClicked.bind(this);
@@ -41,12 +41,12 @@ class Login extends Component {
                 return response.json();
             }
             this.setState({hasLoginFailed: true});
-            this.setState({showSuccesMessage: false});
+            // this.setState({showSuccesMessage: false});
         })
             .then(json => {
                 AuthenticationService.registerSuccesfulLogin(this.state.username, json.role);
                 this.props.history.push(`${json.role}`);
-                this.setState({showSuccesMessage: true});
+                // this.setState({showSuccesMessage: true});
                 this.setState({hasLoginFailed: false})
             })
             .catch(e => console.warn(e))

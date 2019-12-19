@@ -15,8 +15,8 @@ function EditProfile(props) {
         name: "",
         description: "",
         photo: "",
-        nameError: true,
-        descriptionError: true,
+        nameError: false,
+        descriptionError: false,
         photoError: true,
         formValid: true
     });
@@ -34,7 +34,7 @@ function EditProfile(props) {
 //check of het veld 'name' niet leeg (0) is  en als zo, wordt de <p> onder 'name' input met "Name can not be empty" gevuld
 
             if (value.length === 0) {
-                errors.name = "name can not be empty";
+                errors.name = "Artist Name cannot be empty";
                 errors.nameError = true;
                 errors.formValid = false;
             }
@@ -47,7 +47,7 @@ function EditProfile(props) {
 //dit checkt of minstens 20 karakters zijn ingevuld in veld 'description'
 
             if (value.length < 20) {
-                errors.description = "Too short...write more";
+                errors.description = "A minimum of 20 characters is required";
                 errors.descriptionError = true;
                 errors.formValid = false;
                 console.log("Check", key, errors);
@@ -101,13 +101,13 @@ function EditProfile(props) {
                 //als we reactie van server terug hebben, gaan we verder
                 .then(response => {
                     if (response.status === 200) {
-// als status 200, dan is goed gegaan en gaan we naar profile pagina
-                        alert("Gegevens zijn goed verwerkt.");
+// als status 200, dan is goed gegaan en komt alert hiervan
+                        alert("Your profile is edited!.");
                         props.location.push("/profile")
                     } else
                     {
 // als niet goed, komt er alert message
-                        alert("er is iets mis gegaan")
+                        alert("Sorry, something went wrong!")
                     }
 
                 })
@@ -137,10 +137,14 @@ function EditProfile(props) {
                 <input type="file" name="photo" onChange={onPhotoChoosen} ref={photoData}/>
                 <p>{formValidation.photoError && formValidation.photo}</p>
                 <input type="text" name="name" placeholder="ARTIST NAME"/>
-                <Error>{formValidation.nameError && formValidation.name}</Error>
+                { !formValidation.nameError ?
+                    "" :
+                <Error>{formValidation.nameError && formValidation.name}</Error> }
                 <br/>
-                <textarea name="description" placeholder="ABOUT YOURSELF"/>
-                <Error>{formValidation.descriptionError && formValidation.description}</Error>
+                <textarea name="description" placeholder="ABOUT YOURSELF(MIN 20 CHARACTERS)"/>
+                { !formValidation.descriptionError ?
+                    "":
+                    <Error>{formValidation.descriptionError && formValidation.description}</Error>}
                 <br/>
                 <button className="SubmitButton" type="submit">Update Profile</button>
             </form>
